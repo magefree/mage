@@ -144,6 +144,6 @@ class VoltaicVisionaryWatcher extends Watcher {
                 && game.getState()
                         .getWatcher(VoltaicVisionaryWatcher.class).map
                         .getOrDefault(CardUtil.getCardExileZoneId(game, source), emptySet)
-                        .contains(new MageObjectReference(card, game, -1));
+                        .contains(new MageObjectReference(card.getMainCard(), game, -1));
     }
 }

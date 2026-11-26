@@ -77,7 +77,7 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
         if (!isControlledBy(event.getPlayerId())) {
             return false;
         }
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
         if (stackAbility == null
                 || stackAbility.getStackAbility().isManaActivatedAbility()
                 || stackAbility

@@ -22,6 +22,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
@@ -97,7 +98,14 @@ class VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility extends Trigger
             return false;
         }
 
-        Ability ability = game.getStack().getStackObject(event.getTargetId()).getStackAbility();
+        // mana abilities have no stack object (605.3b)
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+        Ability ability = stackObject != null
+                ? stackObject.getStackAbility()
+                : game.getAbility(event.getTargetId(), event.getSourceId()).orElse(null);
+        if (ability == null) {
+            return false;
+        }
 
         return TreasureSpentToCastCondition.instance.apply(game, ability);
     }

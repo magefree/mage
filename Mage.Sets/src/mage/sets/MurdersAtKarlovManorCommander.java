@@ -109,7 +109,11 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 260, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Experiment Twelve", 37, Rarity.RARE, mage.cards.e.ExperimentTwelve.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Experiment Twelve", 347, Rarity.RARE, mage.cards.e.ExperimentTwelve.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eye of Duskmantle", 27, Rarity.RARE, mage.cards.e.EyeOfDuskmantle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eye of Duskmantle", 337, Rarity.RARE, mage.cards.e.EyeOfDuskmantle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Farewell", 64, Rarity.RARE, mage.cards.f.Farewell.class));
+        cards.add(new SetCardInfo("Feather, Radiant Arbiter", 6, Rarity.MYTHIC, mage.cards.f.FeatherRadiantArbiter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Feather, Radiant Arbiter", 313, Rarity.MYTHIC, mage.cards.f.FeatherRadiantArbiter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fell the Mighty", 65, Rarity.RARE, mage.cards.f.FellTheMighty.class));
         cards.add(new SetCardInfo("Fellwar Stone", 228, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fetid Pools", 261, Rarity.RARE, mage.cards.f.FetidPools.class));
@@ -142,6 +146,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hot Pursuit", 342, Rarity.RARE, mage.cards.h.HotPursuit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hydroid Krasis", 212, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 229, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
+        cards.add(new SetCardInfo("Immortal Obligation", 10, Rarity.RARE, mage.cards.i.ImmortalObligation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Immortal Obligation", 321, Rarity.RARE, mage.cards.i.ImmortalObligation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Imperial Hellkite", 155, Rarity.RARE, mage.cards.i.ImperialHellkite.class));
         cards.add(new SetCardInfo("Innocuous Researcher", 38, Rarity.RARE, mage.cards.i.InnocuousResearcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Innocuous Researcher", 348, Rarity.RARE, mage.cards.i.InnocuousResearcher.class, NON_FULL_USE_VARIOUS));

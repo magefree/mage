@@ -553,6 +553,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
             // find must attack targets
             boolean mustAttack = false;
+            boolean mustAttackAnyDefender = false; // requirement without defenders, e.g. "attacks each combat if able"
             Set<UUID> defendersForcedToAttack = new HashSet<>(); // contains only forced defenders
             if (creature.getGoadingPlayers().isEmpty()) {
                 // must attack effects (not goad)
@@ -563,9 +564,12 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                     mustAttack = true;
                     for (Ability ability : entry.getValue()) {
-                        UUID defenderId = effect.mustAttackDefender(ability, game);
-
-                        if (defenderId != null) {
+                        Set<UUID> requiredDefenders = effect.mustAttackDefenders(ability, game);
+                        if (requiredDefenders.isEmpty()) {
+                            mustAttackAnyDefender = true;
+                        }
+                        // attacking any one of the returned defenders obeys the requirement
+                        for (UUID defenderId : requiredDefenders) {
                             // creature is not forced to attack players that are no longer in the game
                             if (game.getPermanentOrLKIBattlefield(defenderId) == null && game.getPlayer(defenderId).hasLost()) {
                                 // TODO: must attack bugged (not goad)? Must use not LKI here or must check controller's lost too?
@@ -582,6 +586,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 // goad effects
                 // if creature is goaded then we start with assumption that it needs to attack any player
                 mustAttack = true;
+                mustAttackAnyDefender = true;
                 // filter only players
                 defendersForcedToAttack.addAll(defenders.stream()
                         .map(game::getPlayer)
@@ -635,6 +640,12 @@ public class Combat implements Serializable, Copyable<Combat> {
 
             // filter goaded players
             defendersForcedToAttack.removeAll(creature.getGoadingPlayers());
+
+            // a requirement to attack specific defenders is obeyed only by attacking one of them, so if none of them
+            // can be attacked without paying a cost, attacking another defender obeys nothing and isn't forced (508.1d)
+            if (!mustAttackAnyDefender && defendersForcedToAttack.isEmpty()) {
+                continue;
+            }
 
             // if no free and valid targets then skip forced attack at all
             if (defendersCostlessAttackable.isEmpty()) {
@@ -1542,6 +1553,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         Permanent attacker = game.getPermanent(creatureId);
         if (attacker == null
                 || game.replaceEvent(new DeclareAttackerEvent(defenderId, creatureId, playerId))
+                || !defenders.contains(defenderId)
+                || !canDefenderBeAttacked(creatureId, defenderId, game) // restrictions affect only declared attackers (508.1c)
                 || !addAttackerToCombat(creatureId, defenderId, game)) {
             return false;
         }
@@ -1567,10 +1580,6 @@ public class Combat implements Serializable, Copyable<Combat> {
             return false;
         }
         Permanent defender = game.getPermanent(defenderId);
-        // Check if defending player can be attacked with another creature
-        if (!canDefenderBeAttacked(attackerId, defenderId, game)) {
-            return false;
-        }
         Permanent attacker = game.getPermanent(attackerId);
         if (attacker == null) {
             return false;

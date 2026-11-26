@@ -127,7 +127,7 @@ class VodalianWarMachineWatcher extends Watcher {
             if (event.getSourceId() != null) {
                 Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
                 if (sourcePermanent != null) {
-                    StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+                    StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
                     if (stackAbility != null) {
                         Ability ability = stackAbility.getStackAbility();
                         if (ability != null) {

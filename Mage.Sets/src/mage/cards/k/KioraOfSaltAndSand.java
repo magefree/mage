@@ -95,7 +95,7 @@ class KioraOfSaltAndSandWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.ACTIVATED_ABILITY) {
             return;
         }
-        StackAbility ability = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+        StackAbility ability = (StackAbility) game.getStack().getStackObject(event.getTargetId());
         if (ability != null && ability.getStackAbility() instanceof LoyaltyAbility) {
             activatedPlayers.add(event.getPlayerId());
         }

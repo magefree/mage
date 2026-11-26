@@ -2,6 +2,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -11,7 +12,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
@@ -69,11 +70,13 @@ class PowerleechTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent == null || !permanent.isArtifact(game)) {
                 return false;
             }
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility == null) {
-                return false;
-            }
-            return !stackAbility.hasTapCost() 
+            // abilities with {T} trigger by the tapped event, mana abilities have no stack object (605.3b)
+            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+            Ability ability = stackObject != null
+                    ? stackObject.getStackAbility()
+                    : game.getAbility(event.getTargetId(), event.getSourceId()).orElse(null);
+            return ability != null
+                    && !ability.hasTapCost()
                     && player.hasOpponent(permanent.getControllerId(), game);
         }
         if (event.getType() == GameEvent.EventType.TAPPED) {

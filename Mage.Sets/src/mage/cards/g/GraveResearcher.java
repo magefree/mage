@@ -53,7 +53,7 @@ public final class GraveResearcher extends PrepareCard {
         this.getSpellCard().getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.getSpellCard().getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("put target creature card from a graveyard onto the battlefield under your control"));
-        Effect effect = new LoseLifeSourceControllerEffect(TargetManaValue.instance);
+        Effect effect = new LoseLifeSourceControllerEffect(TargetManaValue.CARD);
         effect.setText("You lose life equal to its mana value");
         this.getSpellCard().getSpellAbility().addEffect(effect);
     }

@@ -25,7 +25,7 @@ public final class DeepSpaceScan extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(StrangeNewWorldsValue.instance));
         this.getSpellAbility().addEffect(new MaximumHandSizeControllerEffect(
             Integer.MAX_VALUE, Duration.UntilYourNextTurn, HandSizeModification.SET
-        ).setText("you have no maximum hand size until your next turn"));
+        ));
         this.getSpellAbility().setAbilityWord(AbilityWord.STRANGE_NEW_WORLDS).addHint(StrangeNewWorldsHint.instance);
     }
 

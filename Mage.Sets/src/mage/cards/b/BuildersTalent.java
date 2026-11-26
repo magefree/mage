@@ -19,10 +19,9 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.permanent.token.WallWhiteToken;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -35,12 +34,12 @@ import java.util.UUID;
 public final class BuildersTalent extends CardImpl {
 
     private static final FilterPermanent filter = new FilterNonlandPermanent("noncreature, nonland permanents");
-    private static final FilterCard filter2 = new FilterNonlandCard("noncreature, nonland permanent card from your graveyard");
+    private static final FilterCard filter2 = new FilterPermanentCard("noncreature, nonland permanent card from your graveyard");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         filter2.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter2.add(PermanentPredicate.instance);
+        filter2.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public BuildersTalent(UUID ownerId, CardSetInfo setInfo) {

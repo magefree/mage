@@ -83,24 +83,25 @@ class CallOfTheDeathDwellerEffect extends OneShotEffect {
                 || !player.moveCards(cards, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
-        List<PermanentIdPredicate> predicates = cards
+        List<Permanent> permanents = cards.getCards(game)
                 .stream()
-                .map(game::getPermanent)
+                .map(card -> CardUtil.getPermanentFromCardPutToBattlefield(card, game))
                 .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (permanents.isEmpty()) {
+            return false;
+        }
+        if (permanents.size() == 1) {
+            Permanent permanent = permanents.get(0);
+            permanent.addCounters(CounterType.DEATHTOUCH.createInstance(), source.getControllerId(), source, game);
+            permanent.addCounters(CounterType.MENACE.createInstance(), source.getControllerId(), source, game);
+            return true;
+        }
+        List<PermanentIdPredicate> predicates = permanents
+                .stream()
                 .map(MageItem::getId)
                 .map(PermanentIdPredicate::new)
                 .collect(Collectors.toList());
-        if (predicates.isEmpty()) {
-            return false;
-        }
-        if (predicates.size() == 1) {
-            Permanent permanent = game.getPermanent(cards.stream().findFirst().orElse(null));
-            if (permanent != null) {
-                permanent.addCounters(CounterType.DEATHTOUCH.createInstance(), source.getControllerId(), source, game);
-                permanent.addCounters(CounterType.MENACE.createInstance(), source.getControllerId(), source, game);
-            }
-            return true;
-        }
         FilterPermanent filter = new FilterPermanent("creature to put a deathtouch counter on");
         filter.add(Predicates.or(predicates));
         Target target = new TargetPermanent(0, 1, filter, true);

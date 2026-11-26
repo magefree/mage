@@ -9,6 +9,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -98,9 +99,10 @@ class EaglesRescueEffect extends OneShotEffect {
                 && game.getState().getZone(aura.getId()) == Zone.GRAVEYARD) {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (!targetPermanent.cantBeAttachedBy(aura, source, game, false)) {
-                game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
+                AttachEffect.setAttachTo(game, aura.getId(), targetPermanent);
                 controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-                return targetPermanent.addAttachment(aura.getId(), source, game);
+                Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+                return attachment != null && targetPermanent.addAttachment(attachment.getId(), source, game);
             }
         }
         return false;

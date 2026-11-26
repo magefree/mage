@@ -31,7 +31,7 @@ public final class DelightfulDiscovery extends CardImpl {
                 Zone.ALL,
                 new SpellCostReductionForEachSourceEffect(
                         1, DelightfulDiscoveryValue.instance
-                ).setCanWorksOnStackOnly(true)
+                )
         ).setRuleAtTheTop(true).addHint(DelightfulDiscoveryValue.getHint()));
 
         // Scry 2, then draw two cards.
@@ -60,7 +60,7 @@ enum DelightfulDiscoveryValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game
-                .getOpponents(sourceAbility.getControllerId())
+                .getOpponents(sourceAbility.getControllerId(), false)
                 .stream()
                 .mapToInt(game.getState().getWatcher(SpellsCastWatcher.class)::getCount)
                 .sum();

@@ -69,8 +69,8 @@ class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getPlayerId().equals(getControllerId())) {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (source != null && (source.isArtifact(game) || source.isCreature(game))) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                return !stackAbility.getStackAbility().isManaActivatedAbility();
+                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
+                return stackAbility != null && !stackAbility.getStackAbility().isManaActivatedAbility();
             }
         }
         return false;

@@ -27,7 +27,7 @@ public final class VanishIntoEternity extends CardImpl {
 
         // This spell costs {3} more to cast if it targets a creature.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostIncreaseSourceEffect(3, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostIncreaseSourceEffect(3, condition)
         ).setRuleAtTheTop(true));
 
         // Exile target nonland permanent.

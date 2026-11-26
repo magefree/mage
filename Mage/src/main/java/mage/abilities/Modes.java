@@ -56,6 +56,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     private boolean mayChooseSameModeMoreThanOnce = false; // example: choose three... you may choose the same mode more than once
     private boolean mayChooseNone = false;
     private boolean isRandom = false; // random from available modes, not modes TODO: research rules of Cult of Skaro after WHO release (is it random from all modes or from available/valid)
+    private Condition chooseInsteadOfRandomCondition; // random modes, but if condition then you choose instead (example: choose one at random. If ..., you choose one instead)
 
     public Modes() {
         // add default mode
@@ -93,6 +94,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         this.mayChooseSameModeMoreThanOnce = modes.mayChooseSameModeMoreThanOnce;
         this.mayChooseNone = modes.mayChooseNone;
         this.isRandom = modes.isRandom;
+        this.chooseInsteadOfRandomCondition = modes.chooseInsteadOfRandomCondition;
 
         // current mode must be "copied" at the end
         this.selectedModes.addAll(modes.getSelectedModes()); // TODO: bugged - can lost multi selects here?
@@ -397,7 +399,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             }
 
             // choose random
-            if (this.isRandom) {
+            if (this.isRandom && (chooseInsteadOfRandomCondition == null || !chooseInsteadOfRandomCondition.apply(game, source))) {
                 // TODO: research rules of Cult of Skaro after WHO release (is it random from all modes or from available/valid)
                 this.addSelectedMode(availableModes.get(RandomUtil.nextInt(availableModes.size())).getId());
                 return isSelectedValid(source, game);
@@ -744,6 +746,15 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
     public void setRandom(boolean isRandom) {
         this.isRandom = isRandom;
+    }
+
+    /**
+     * Choose modes at random, but if the condition is true then you choose instead
+     * (example: choose one at random. If you discarded a card this turn, you choose one instead)
+     */
+    public void setRandom(Condition chooseInsteadOfRandomCondition) {
+        this.isRandom = true;
+        this.chooseInsteadOfRandomCondition = chooseInsteadOfRandomCondition;
     }
 
     public boolean isLimitUsageResetOnNewTurn() {

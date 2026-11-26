@@ -17,6 +17,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.ElfWarriorToken;
 import mage.target.common.TargetControlledPermanent;
@@ -33,6 +34,7 @@ public final class LathrilBladeOfTheElves extends CardImpl {
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
+        filter.add(AnotherPredicate.instance);
     }
 
     public LathrilBladeOfTheElves(UUID ownerId, CardSetInfo setInfo) {

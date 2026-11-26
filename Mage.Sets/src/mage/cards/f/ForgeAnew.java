@@ -127,7 +127,7 @@ class ForgeAnewWatcher extends Watcher {
             return;
         }
 
-        StackObject object = game.getStack().getStackObject(event.getSourceId());
+        StackObject object = game.getStack().getStackObject(event.getTargetId());
 
         if (object != null && object.getStackAbility() instanceof EquipAbility) {
             equippedThisTurn.add(event.getPlayerId());

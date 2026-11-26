@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.filter.predicate.other.CreatureSourcePredicate;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
 import mage.abilities.Ability;
@@ -24,7 +24,7 @@ import mage.constants.CardType;
  */
 public final class EchoPerceptiveProdigy extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("activated or triggered ability you control from a creature source");
+    private static final FilterActivatedOrTriggeredAbility filter = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control from a creature source");
 
     static {
         filter.add(CreatureSourcePredicate.instance);

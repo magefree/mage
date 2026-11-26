@@ -8,6 +8,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * Used for "Return {this} to the battlefield attached to that creature at the beginning of the next end step" abilities.
@@ -37,9 +38,10 @@ public class ReturnToBattlefieldAttachedEffect extends OneShotEffect {
             return false;
         }
 
-        game.getState().setValue("attachTo:" + aura.getId(), creature);
+        AttachEffect.setAttachTo(game, aura.getId(), creature);
         controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-        return creature.addAttachment(aura.getId(), source, game);
+        Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(aura, game);
+        return attachment != null && creature.addAttachment(attachment.getId(), source, game);
     }
 
     @Override

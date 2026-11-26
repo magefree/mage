@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.SpreeAbility;
 import mage.cards.Card;
@@ -119,9 +120,12 @@ class OneLastJobEffect extends OneShotEffect {
                             + " to:" + permanent.getLogName()
                             + CardUtil.getSourceLogName(game, source)
             );
-            game.getState().setValue("attachTo:" + cardToReturn.getId(), permanent);
+            AttachEffect.setAttachTo(game, cardToReturn.getId(), permanent);
             controller.moveCards(cardToReturn, Zone.BATTLEFIELD, source, game);
-            permanent.addAttachment(cardToReturn.getId(), source, game);
+            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(cardToReturn, game);
+            if (attachment != null) {
+                permanent.addAttachment(attachment.getId(), source, game);
+            }
             return true;
         }
 

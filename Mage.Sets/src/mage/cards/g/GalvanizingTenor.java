@@ -9,6 +9,7 @@ import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
@@ -34,7 +35,7 @@ public final class GalvanizingTenor extends CardImpl {
         // Battlefront -- Whenever this creature attacks, goad up to X target creatures, where X is the number of opponents you attacked this turn.
         Ability ability = new AttacksTriggeredAbility(new GoadTargetEffect()
             .setText("goad up to X target creatures, where X is the number of opponents you attacked this turn"))
-            .withFlavorWord("Battlefront").addHint(AttackedThisTurnOpponentsCount.getHint());
+            .setAbilityWord(AbilityWord.BATTLEFRONT).addHint(AttackedThisTurnOpponentsCount.getHint());
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         ability.setTargetAdjuster(new TargetsCountAdjuster(AttackedThisTurnOpponentsCount.instance));
         this.addAbility(ability, new PlayersAttackedThisTurnWatcher());

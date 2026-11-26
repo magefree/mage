@@ -58,7 +58,7 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
                 }
                 break;
             case OPPONENT:
-                if (!game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
+                if (!game.getOpponents(this.getControllerId(), false).contains(event.getPlayerId())) {
                     return false;
                 }
                 break;

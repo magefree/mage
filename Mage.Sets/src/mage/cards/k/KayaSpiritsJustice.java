@@ -170,7 +170,7 @@ class KayaSpiritsJusticeCopyEffect extends OneShotEffect {
             return false;
         }
 
-        Permanent newBlueprint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+        Permanent newBlueprint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
         newBlueprint.assignNewId();
         CopyApplier applier = new KayaSpiritsJusticeCopyApplier();
         applier.apply(game, newBlueprint, source, copyToPermanent.getId());

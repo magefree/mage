@@ -68,8 +68,8 @@ public class ConniveSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // 701.47c If a permanent changes zones before an effect causes it to connive,
-        // its last known information is used to determine which object connived and who controlled it.
+        // 701.50b If a permanent is no longer on the battlefield as an effect instructs it to connive, its last known
+        // information is used to determine which object connived and who controlled it.
         Permanent permanent = source.getSourcePermanentOrLKI(game);
         boolean connived = connive(permanent, 1, source, game);
         if (ability != null && connived) {
@@ -107,6 +107,11 @@ public class ConniveSourceEffect extends OneShotEffect {
         if (permanentStillOnBattlefield && counters > 0) {
             permanent.addCounters(CounterType.P1P1.createInstance(counters), source, game);
         }
+        // 701.50f A permanent "connives" after the process described in either rule 701.50a or 701.50d is complete,
+        // even if some or all of those actions were impossible.
+        game.fireEvent(new GameEvent(
+                GameEvent.EventType.CONNIVED, permanent.getId(), source, player.getId(), amount, false
+        ));
         return true;
     }
 

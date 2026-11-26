@@ -15,8 +15,7 @@ import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
-import mage.filter.FilterStackObject;
-import mage.filter.common.FilterActivatedOrTriggeredAbility;
+import mage.filter.FilterAbility;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.other.NotManaAbilityPredicate;
 import mage.game.ExileZone;
@@ -31,7 +30,7 @@ import java.util.UUID;
  */
 public final class TheEnigmaJewel extends TransformingDoubleFacedCard {
 
-    private static final FilterStackObject filter = new FilterActivatedOrTriggeredAbility("an ability that isn't a mana ability");
+    private static final FilterAbility filter = new FilterAbility("an ability that isn't a mana ability");
 
     static {
         filter.add(NotManaAbilityPredicate.instance);

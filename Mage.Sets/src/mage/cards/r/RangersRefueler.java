@@ -16,7 +16,7 @@ import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterStackObject;
+import mage.filter.FilterAbility;
 import mage.filter.predicate.other.ExhaustAbilityPredicate;
 
 import java.util.UUID;
@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class RangersRefueler extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("an exhaust ability");
+    private static final FilterAbility filter = new FilterAbility("an exhaust ability");
 
     static {
         filter.add(ExhaustAbilityPredicate.instance);

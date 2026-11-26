@@ -21,19 +21,16 @@ import java.util.UUID;
 public class PrepareCastFromExileEffect extends AsThoughEffectImpl {
 
     private final UUID copyId;
-    private final UUID permanentId;
 
-    public PrepareCastFromExileEffect(UUID copyId, UUID permanentId) {
+    public PrepareCastFromExileEffect(UUID copyId) {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.copyId = copyId;
-        this.permanentId = permanentId;
         staticText = "its controller may cast the prepared copy from exile because this permanent is prepared";
     }
 
     protected PrepareCastFromExileEffect(PrepareCastFromExileEffect effect) {
         super(effect);
         this.copyId = effect.copyId;
-        this.permanentId = effect.permanentId;
     }
 
     @Override
@@ -49,14 +46,12 @@ public class PrepareCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Card copy = game.getCard(copyId);
-        Permanent permanent = game.getPermanent(permanentId);
-        if (copy == null || permanent == null || !permanent.isPrepared()
-                || game.getState().getZone(copyId) != Zone.EXILED) {
+        Permanent permanent = copy instanceof PreparedSpellCopy ? ((PreparedSpellCopy) copy).getPreparedPermanent(game) : null;
+        if (permanent == null || game.getState().getZone(copyId) != Zone.EXILED) {
             discard();
             return false;
         }
-        return copy instanceof PreparedSpellCopy
-                && objectId.equals(copyId)
+        return objectId.equals(copyId)
                 && affectedControllerId.equals(permanent.getControllerId());
     }
 }

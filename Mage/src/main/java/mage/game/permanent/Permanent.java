@@ -100,6 +100,11 @@ public interface Permanent extends Card, Controllable {
 
     boolean isPrepared();
 
+    /**
+     * Prepare spell's copy in exile, created by the current prepared designation (722.3c)
+     */
+    UUID getPreparedSpellCopyId();
+
     void setPrepared(boolean prepared, Game game);
 
     int getClassLevel();
@@ -249,6 +254,11 @@ public interface Permanent extends Card, Controllable {
     boolean fight(Permanent fightTarget, Ability source, Game game);
 
     /**
+     * @return the damage dealt by this permanent to fightTarget
+     */
+    int fight(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);
+
+    /**
      * Resolves a fight and returns the amount of excess damage dealt to fightTarget
      */
     int fightWithExcess(Permanent fightTarget, Ability source, Game game, boolean batchTrigger);
@@ -288,6 +298,10 @@ public interface Permanent extends Card, Controllable {
     void setLegendRuleApplies(boolean legendRuleApplies);
 
     boolean legendRuleApplies();
+
+    void setZeroLoyaltyRuleApplies(boolean zeroLoyaltyRuleApplies);
+
+    boolean zeroLoyaltyRuleApplies();
 
     void resetControl();
 

@@ -72,7 +72,7 @@ class RepeatedReverberationTriggeredAbility extends DelayedTriggeredAbility {
 
         // activated ability
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
             if (stackAbility != null && stackAbility.getStackAbility() instanceof LoyaltyAbility) {
                 this.getEffects().clear();
                 this.addEffect(

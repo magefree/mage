@@ -21,6 +21,7 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -86,9 +87,12 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
                         this.setTargetPointer(new FixedTarget(targetPlayer.getId()));
-                        game.getState().setValue("attachTo:" + card.getId(), targetPlayer.getId());
+                        AttachEffect.setAttachTo(game, card.getId(), targetPlayer.getId());
                         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            targetPlayer.addAttachment(card.getId(), source, game);
+                            Permanent attachment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                            if (attachment != null) {
+                                targetPlayer.addAttachment(attachment.getId(), source, game);
+                            }
                         }
                     }
                 }

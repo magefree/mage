@@ -1,6 +1,7 @@
 package org.mage.test.cards.single.leg;
 
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
@@ -46,5 +47,59 @@ public class TakklemaggotTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerB, 18);
+    }
+
+    @Test
+    public void test_ReturnAsNonAura_NoCreatures() {
+        // When enchanted creature dies, that creature’s controller chooses a creature that Takklemaggot could enchant.
+        // If they don’t, return Takklemaggot to the battlefield under your control as a non-Aura enchantment.
+        // It loses “enchant creature” and gains “At the beginning of that player’s upkeep, Takklemaggot deals 1 damage to that player.”
+        addCard(Zone.HAND, playerA, takklemaggot); // {2}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        //
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, takklemaggot, "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // no creatures to enchant
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target destroy", "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, takklemaggot, 1);
+        assertNotSubtype(takklemaggot, SubType.AURA);
+        assertLife(playerB, 20 - 1);
+    }
+
+    @Test
+    public void test_ReturnAsNonAura_CreatureCantBeEnchanted() {
+        // When enchanted creature dies, that creature’s controller chooses a creature that Takklemaggot could enchant.
+        // If they don’t, return Takklemaggot to the battlefield under your control as a non-Aura enchantment.
+        // It loses “enchant creature” and gains “At the beginning of that player’s upkeep, Takklemaggot deals 1 damage to that player.”
+        addCard(Zone.HAND, playerA, takklemaggot); // {2}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        //
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "White Knight"); // 2/2, protection from black
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, takklemaggot, "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // no creatures that Takklemaggot could enchant
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target destroy", "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, takklemaggot, 1);
+        assertNotSubtype(takklemaggot, SubType.AURA);
+        assertAttachedTo(playerA, takklemaggot, "White Knight", false);
+        assertLife(playerB, 20 - 1);
     }
 }

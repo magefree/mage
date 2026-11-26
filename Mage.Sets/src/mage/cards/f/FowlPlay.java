@@ -31,11 +31,12 @@ public final class FowlPlay extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
-        // Enchanted creature is a Bird with base power and toughness 1/1 and loses all abilities.
+        // Enchanted creature loses all abilities and is a Bird creature with base power and toughness 1/1.
+        // Setting the card type to Creature removes its other card types and their subtypes (CR 205.1a).
         this.addAbility(new SimpleStaticAbility(
                 new BecomesCreatureAttachedEffect(new CreatureToken(1, 1, "1/1 Bird creature", SubType.BIRD),
-                        "Enchanted creature is a Bird with base power and toughness 1/1 and loses all abilities",
-                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE)));
+                        "Enchanted creature loses all abilities and is a Bird creature with base power and toughness 1/1",
+                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL_BUT_COLOR)));
     }
 
     private FowlPlay(final FowlPlay card) {

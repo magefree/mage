@@ -49,7 +49,7 @@ public final class ErisRoarOfTheStorm extends CardImpl {
                 Zone.ALL,
                 new SpellCostReductionForEachSourceEffect(
                         2, ErisRoarOfTheStormValue.instance
-                ).setCanWorksOnStackOnly(true)
+                )
         ).setRuleAtTheTop(true).addHint(ErisRoarOfTheStormHint.instance));
 
         // Flying

@@ -48,7 +48,7 @@ public final class RelentlessDead extends CardImpl {
         // When Relentless Dead dies, you may pay {X}. If you do, return another target Zombie creature card with converted mana cost X from your graveyard to the battlefield.
         Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
-                new DynamicValueGenericManaCost(TargetManaValue.instance, "{X}")));
+                new DynamicValueGenericManaCost(TargetManaValue.CARD, "{X}")));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

@@ -26,6 +26,10 @@ public class MayhemAbility extends SpellAbility {
 
     private final String rule;
 
+    public static Watcher createWatcher() {
+        return new MayhemWatcher();
+    }
+
     public MayhemAbility(Card card, String manaString) {
         super(card.getSpellAbility());
         this.newId();

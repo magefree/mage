@@ -27,7 +27,10 @@ public final class LoamDryad extends CardImpl {
 
         // {T}, Tap an untapped creature you control: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
-        ability.addCost(new TapTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES));
+        // One creature, so the singular filter: the cost's text is built from the
+        // filter's message, and the plural one reads "Tap an untapped creatures
+        // you control", which is not the printed Oracle text.
+        ability.addCost(new TapTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE));
         this.addAbility(ability);
     }
 

@@ -8,6 +8,7 @@ import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -35,7 +36,7 @@ public final class OwnTheDay extends CardImpl {
                 Zone.ALL,
                 new SpellCostReductionForEachSourceEffect(1, AttackedThisTurnOpponentsCount.instance)
                     .setText("this spell costs {1} less to cast for each opponent you attacked this turn")
-            ).withFlavorWord("Battlefront").addHint(AttackedThisTurnOpponentsCount.getHint()),
+            ).setAbilityWord(AbilityWord.BATTLEFRONT).addHint(AttackedThisTurnOpponentsCount.getHint()),
             new PlayersAttackedThisTurnWatcher()
         );
 

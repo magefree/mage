@@ -28,6 +28,10 @@ public class TapSourceEffect extends OneShotEffect {
         this.withoutTrigger = effect.withoutTrigger;
     }
 
+    public boolean withoutTrigger() {
+        return this.withoutTrigger;
+    }
+
     @Override
     public TapSourceEffect copy() {
         return new TapSourceEffect(this);

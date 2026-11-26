@@ -12,13 +12,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
-import mage.target.TargetStackObject;
+import mage.target.common.TargetActivatedOrTriggeredAbility;
 
 import java.util.UUID;
 
@@ -27,8 +27,8 @@ import java.util.UUID;
  */
 public final class GreenSlime extends CardImpl {
 
-    private static final FilterStackObject filter
-            = new FilterStackObject("activated or triggered ability from an artifact or enchantment source");
+    private static final FilterActivatedOrTriggeredAbility filter
+            = new FilterActivatedOrTriggeredAbility("activated or triggered ability from an artifact or enchantment source");
 
     static {
         filter.add(GreenSlimePredicate.instance);
@@ -46,7 +46,7 @@ public final class GreenSlime extends CardImpl {
 
         // When Green Slime enters the battlefield, counter target activated or triggered ability from an artifact or enchantment source. If a permanent's ability is countered this way, destroy that permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GreenSlimeEffect());
-        ability.addTarget(new TargetStackObject(filter));
+        ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
         this.addAbility(ability);
 
         // Foretell {G}

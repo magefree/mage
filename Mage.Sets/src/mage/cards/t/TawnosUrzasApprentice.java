@@ -10,7 +10,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.filter.predicate.other.ArtifactSourcePredicate;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
 
@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class TawnosUrzasApprentice extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("activated or triggered ability you control from an artifact source");
+    private static final FilterActivatedOrTriggeredAbility filter = new FilterActivatedOrTriggeredAbility("activated or triggered ability you control from an artifact source");
 
     static {
         filter.add(ArtifactSourcePredicate.instance);

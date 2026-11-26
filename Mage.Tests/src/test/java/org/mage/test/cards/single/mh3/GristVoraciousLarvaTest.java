@@ -166,7 +166,6 @@ public class GristVoraciousLarvaTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Dryad Arbor");
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dryad Arbor");
-        setChoice(playerA, "Land"); // Choose to consume the Land part of Muldrotha, "Creature" would have not worked anyway since Dryad Arbor can not be cast.
         setChoice(playerA, true); // pay for Grist's trigger
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -73,7 +73,7 @@ class DestinedConfrontationEffect extends OneShotEffect {
             permanents.addAll(target.getTargets());
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), source, game
+                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game
         )) {
             if (!permanents.contains(permanent.getId())) {
                 permanent.sacrifice(source, game);

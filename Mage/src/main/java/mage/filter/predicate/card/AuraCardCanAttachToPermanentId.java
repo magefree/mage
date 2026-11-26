@@ -4,6 +4,7 @@ import mage.cards.Card;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -25,7 +26,8 @@ public class AuraCardCanAttachToPermanentId implements Predicate<Card> {
         if (permanent == null || input == null || !input.isEnchantment(game)) {
             return false;
         }
-        return input
+        // double faced cards: a main card has no own spell ability, must check the side that enters the battlefield
+        return CardUtil.getDefaultCardSideForBattlefield(game, input)
                 .getSpellAbility()
                 .getTargets()
                 .stream()

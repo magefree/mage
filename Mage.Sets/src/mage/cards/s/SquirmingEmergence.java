@@ -9,10 +9,10 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterNonlandCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.mageobject.PermanentPredicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -24,12 +24,12 @@ import java.util.UUID;
  */
 public final class SquirmingEmergence extends CardImpl {
 
-    private static final FilterCard filter = new FilterNonlandCard(
+    private static final FilterCard filter = new FilterPermanentCard(
             "nonland permanent card in your graveyard with mana value less than or equal to the number of permanent cards in your graveyard"
     );
 
     static {
-        filter.add(PermanentPredicate.instance);
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(SquirmingEmergencePredicate.instance);
     }
 

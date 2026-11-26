@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
@@ -359,5 +360,45 @@ public class DisturbTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertExileCount(mirrorhallMimic, 1);
+    }
+
+    @Test
+    public void test_DisturbAura_TwinbladeGeist() {
+        // https://github.com/magefree/mage/issues/16071
+
+        // Disturb {2}{W}
+        // Twinblade Invocation: Enchant creature. Enchanted creature has double strike.
+        addCard(Zone.GRAVEYARD, playerA, "Twinblade Geist"); // {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // bear 2/2
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Twinblade Invocation using Disturb");
+        addTarget(playerA, "Grizzly Bears"); // creature to enchant
+
+        attack(1, playerA, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertAttachedTo(playerA, "Twinblade Invocation", "Grizzly Bears", true);
+        assertAbility(playerA, "Grizzly Bears", DoubleStrikeAbility.getInstance(), true);
+        assertLife(playerB, 20 - 2 * 2);
+    }
+
+    @Test
+    public void test_DisturbAuraWithoutTarget_TwinbladeGeist() {
+        // Disturb {2}{W}
+        // Twinblade Invocation: Enchant creature. Enchanted creature has double strike.
+        addCard(Zone.GRAVEYARD, playerA, "Twinblade Geist"); // {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        // aura spell can't be cast without a creature to enchant
+        checkPlayableAbility("no creatures", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Twinblade Invocation using Disturb", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
     }
 }

@@ -39,7 +39,7 @@ public final class RalsStaticaster extends CardImpl {
 
         // Whenever Ral's Staticaster attacks, if you control a Ral planeswalker, Ral's Staticaster gets +1/+0 for each card in your hand until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                CardsInControllerHandCount.ANY, StaticValue.get(0), Duration.EndOfTurn
+                CardsInControllerHandCount.ANY_SINGULAR, StaticValue.get(0), Duration.EndOfTurn
         ).setText("this creature gets +1/+0 for each card in your hand until end of turn")).withInterveningIf(condition));
     }
 

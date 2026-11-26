@@ -31,7 +31,7 @@ public final class JoltedAwake extends CardImpl {
         this.getSpellAbility().addEffect(new DoIfCostPaid(
                 new ReturnFromGraveyardToBattlefieldTargetEffect()
                         .setText("return it from your graveyard to the battlefield"),
-                new PayEnergyCost(TargetManaValue.instance, "pay an amount of {E} equal to that card's mana value"),
+                new PayEnergyCost(TargetManaValue.CARD, "pay an amount of {E} equal to that card's mana value"),
                 "pay an amount of {E} equal to that card's mana value?",
                 true
         ).concatBy("Then"));

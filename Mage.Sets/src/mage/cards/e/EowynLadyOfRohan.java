@@ -13,6 +13,8 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterAbility;
+import mage.filter.predicate.other.AbilityClassPredicate;
 import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -26,6 +28,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class EowynLadyOfRohan extends CardImpl {
+
+    private static final FilterAbility filterEquip = new FilterAbility("equip abilities you activate");
+
+    static {
+        filterEquip.add(new AbilityClassPredicate(EquipAbility.class));
+    }
 
     public EowynLadyOfRohan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -44,9 +52,7 @@ public final class EowynLadyOfRohan extends CardImpl {
         this.addAbility(ability);
 
         // Equip abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(
-                EquipAbility.class, "Equip", 1
-        ).setText("equip abilities you activate cost {1} less to activate")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(filterEquip)));
     }
 
     private EowynLadyOfRohan(final EowynLadyOfRohan card) {

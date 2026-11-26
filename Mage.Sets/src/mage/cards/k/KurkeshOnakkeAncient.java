@@ -1,6 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.ActivateAbilityTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyStackObjectEffect;
@@ -11,10 +12,10 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterStackObject;
-import mage.filter.common.FilterActivatedOrTriggeredAbility;
-import mage.filter.predicate.other.ArtifactSourcePredicate;
+import mage.filter.FilterAbility;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.other.NotManaAbilityPredicate;
+import mage.game.Game;
 
 import java.util.UUID;
 
@@ -22,11 +23,11 @@ import java.util.UUID;
  * @author emerald000
  */
 public final class KurkeshOnakkeAncient extends CardImpl {
-    private static final FilterStackObject filter = new FilterActivatedOrTriggeredAbility("an ability of an artifact, if it isn't a mana ability");
+    private static final FilterAbility filter = new FilterAbility("an ability of an artifact, if it isn't a mana ability");
 
     static {
         filter.add(NotManaAbilityPredicate.instance);
-        filter.add(ArtifactSourcePredicate.instance);
+        filter.add(KurkeshOnakkeAncientPredicate.instance);
     }
 
     public KurkeshOnakkeAncient(UUID ownerId, CardSetInfo setInfo) {
@@ -49,5 +50,14 @@ public final class KurkeshOnakkeAncient extends CardImpl {
     @Override
     public KurkeshOnakkeAncient copy() {
         return new KurkeshOnakkeAncient(this);
+    }
+}
+
+enum KurkeshOnakkeAncientPredicate implements Predicate<Ability> {
+    instance;
+
+    @Override
+    public boolean apply(Ability input, Game game) {
+        return input.getSourceObject(game).isArtifact(game);
     }
 }

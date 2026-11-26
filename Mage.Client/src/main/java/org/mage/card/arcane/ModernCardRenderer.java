@@ -126,6 +126,7 @@ public class ModernCardRenderer extends CardRenderer {
     static String SUB_TYPE_ADVENTURE = "Adventure";
     static String SUB_TYPE_OMEN = "Omen";
     static String SUB_TYPE_PREPARE = "Prepare";
+    static String SUB_TYPE_VENGEANCE = "Vengeance";
 
     ///////////////////////////////////////////////////////////////////////////
     // Layout metrics for modern border cards
@@ -185,6 +186,7 @@ public class ModernCardRenderer extends CardRenderer {
         if (cardView.isSplitCard()) {
             isCardWithSpellOption = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE)
                                 || cardView.getRightSplitTypeLine().contains(SUB_TYPE_OMEN)
+                                || cardView.getRightSplitTypeLine().contains(SUB_TYPE_VENGEANCE)
                                 || SUB_TYPE_PREPARE.equals(cardView.getRightSplitSpellType());
             isPrepareSpellOption = SUB_TYPE_PREPARE.equals(cardView.getRightSplitSpellType());
         }
@@ -647,9 +649,7 @@ public class ModernCardRenderer extends CardRenderer {
             drawTypeLine(g, attribs, getCardSubTypeLine(),
                     totalContentInset + 4 * contentWidth / 7 + boxHeight, typeLineY + boxHeight + (cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3) / 2 - contentInset,
                     3 * contentWidth / 7 - boxHeight - contentInset, boxHeight - 4, true);
-            drawRulesText(g, textboxKeywords, textboxRules,
-                    x, y,
-                    w, h, false);
+            drawZendikarLandSymbol(g, x, y, w, h);
         } else if (isUnstableFullArtLand()) {
             int x = 0;
             int y = 0;
@@ -1236,30 +1236,9 @@ public class ModernCardRenderer extends CardRenderer {
             allRules.add(0, keywordsRule);
         }
 
-        if (isUnstableFullArtLand()) {
+        if (!forceRules && cardView.isLand() && allRules.size() == 1 && allRules.get(0) instanceof TextboxBasicManaRule) {
+            drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
             return;
-        }
-
-        // Basic mana draw mana symbol in textbox (for basic lands)
-        if (!forceRules && (allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.isLand() || isZendikarFullArtLand())) {
-            if (!isZendikarFullArtLand()) {
-                drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
-                return;
-            } else // Big circle in the middle for Zendikar lands
-                if (allRules.size() == 1) {
-                    // Size of mana symbol = 9/4 * h, 3/4h above line
-                    if (allRules.get(0) instanceof TextboxBasicManaRule) {
-                        drawBasicManaSymbol(g, x + w / 2 - 9 * h / 8 + 1, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
-                    } else {
-                        drawBasicManaSymbol(g, x + w / 2 - h - h / 8, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, cardView.getFrameColor().toString());
-                    }
-                    return;
-                } else {
-                    if (allRules.size() > 1) {
-                        drawBasicManaSymbol(g, x + w / 2 - h - h / 8, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, cardView.getFrameColor().toString());
-                    }
-                    return;
-                }
         }
 
         // Go through possible font sizes in descending order to find the best fit
@@ -1312,15 +1291,28 @@ public class ModernCardRenderer extends CardRenderer {
         ManaSymbols.draw(g, symbs, x + (w - manaCostWidth) / 2, y + (h - symbHeight) / 2, symbHeight, ModernCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
     }
 
-    private void drawBasicManaSymbol(Graphics2D g, int x, int y, int w, int h, String symbol) {
-        String symbs = symbol;
+    private void drawZendikarLandSymbol(Graphics2D g, int x, int y, int w, int h) {
+        if (textboxRules.isEmpty() && textboxKeywords.isEmpty()) {
+            return;
+        }
+        // The symbol straddles the narrow Zendikar land type line.
+        int size = 9 * h / 4;
+        int symbolX = x + w / 2 - size / 2;
+        String symbol;
+        if (textboxKeywords.isEmpty() && textboxRules.size() == 1 && textboxRules.get(0) instanceof TextboxBasicManaRule) {
+            symbol = ((TextboxBasicManaRule) textboxRules.get(0)).getBasicManaSymbol();
+            symbolX++;
+        } else {
+            symbol = cardView.getFrameColor().toString();
+        }
+        int symbolY = y - 3 * h / 4;
         if (getSizedManaSymbol(symbol) != null) {
-            ManaSymbols.draw(g, symbs, x, y, w, ModernCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
+            ManaSymbols.draw(g, symbol, symbolX, symbolY, size, MANA_ICONS_TEXT_COLOR, 2);
         }
         if (symbol.length() == 2) {
-            String symbs2 = "" + symbol.charAt(1) + symbol.charAt(0);
-            if (getSizedManaSymbol(symbs2) != null) {
-                ManaSymbols.draw(g, symbs2, x, y, w, ModernCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
+            String reversedSymbol = "" + symbol.charAt(1) + symbol.charAt(0);
+            if (getSizedManaSymbol(reversedSymbol) != null) {
+                ManaSymbols.draw(g, reversedSymbol, symbolX, symbolY, size, MANA_ICONS_TEXT_COLOR, 2);
             }
         }
     }

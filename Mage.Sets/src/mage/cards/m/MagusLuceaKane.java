@@ -17,7 +17,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -92,12 +92,14 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
 
         // activated ability
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null) {
-                if (stackAbility.getManaCostsToPay().containsX()) {
-                    getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                    return true;
-                }
+            // mana abilities don't use the stack (605.3b) - they trigger it too, but there is nothing to copy
+            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+            Ability ability = stackObject != null
+                    ? stackObject.getStackAbility()
+                    : game.getAbility(event.getTargetId(), event.getSourceId()).orElse(null);
+            if (ability != null && ability.getManaCostsToPay().containsX()) {
+                getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                return true;
             }
         }
 

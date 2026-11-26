@@ -1896,6 +1896,10 @@ public class ScryfallImageSupportTokens {
             put("BRC/Servo", "https://api.scryfall.com/cards/tbrc/13/en?format=image");
             put("BRC/Thopter", "https://api.scryfall.com/cards/tbrc/6/en?format=image");
 
+            // BOT
+            put("BOT/Laserbeak", "https://api.scryfall.com/cards/tbot/1/en?format=image");
+            put("BOT/Ravage", "https://api.scryfall.com/cards/tbot/2/en?format=image");
+
             // DMR
             put("DMR/Bird", "https://api.scryfall.com/cards/tdmr/1/en?format=image");
             put("DMR/Cat/1", "https://api.scryfall.com/cards/tdmr/3/en?format=image");

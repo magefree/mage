@@ -6,6 +6,7 @@ import mage.abilities.dynamicvalue.common.AttackedThisTurnOpponentsCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.game.permanent.token.KlingonWarriorToken;
 import mage.watchers.common.PlayersAttackedThisTurnWatcher;
@@ -28,7 +29,7 @@ public final class RiteOfAscension extends CardImpl {
                 ).setText("for each opponent you attacked this turn, create a tapped and attacking "
                     + "2/1 red Klingon Warrior creature token with haste"),
                 1
-            ).withFlavorWord("Battlefront")
+            ).setAbilityWord(AbilityWord.BATTLEFRONT)
             .addHint(AttackedThisTurnOpponentsCount.getHint()),
             new PlayersAttackedThisTurnWatcher());
     }

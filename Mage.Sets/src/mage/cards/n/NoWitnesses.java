@@ -12,11 +12,10 @@ import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -59,7 +58,13 @@ class NoWitnessesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Map<UUID, Integer> map = game
+        // CR 608.2: a player who controls no creatures still counts, with zero, so when every
+        // player is at zero they are all tied for the most and each of them investigates.
+        Map<UUID, Integer> map = new HashMap<>();
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            map.put(playerId, 0);
+        }
+        game
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_PERMANENT_CREATURE,
@@ -68,10 +73,7 @@ class NoWitnessesEffect extends OneShotEffect {
                 .stream()
                 .filter(Objects::nonNull)
                 .map(Controllable::getControllerId)
-                .collect(Collectors.toMap(Function.identity(), x -> 1, Integer::sum));
-        if (map.isEmpty()) {
-            return false;
-        }
+                .forEach(playerId -> map.computeIfPresent(playerId, (id, count) -> count + 1));
         int maxValue = map
                 .values()
                 .stream()
@@ -79,7 +81,7 @@ class NoWitnessesEffect extends OneShotEffect {
                 .max()
                 .orElse(0);
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            if (map.getOrDefault(playerId, -1) >= maxValue) {
+            if (map.getOrDefault(playerId, 0) >= maxValue) {
                 InvestigateEffect.doInvestigate(playerId, 1, game, source);
             }
         }

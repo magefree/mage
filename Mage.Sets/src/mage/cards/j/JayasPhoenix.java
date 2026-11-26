@@ -91,7 +91,7 @@ class JayasPhoenixTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
 
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
         if (stackAbility != null && stackAbility.getStackAbility() instanceof LoyaltyAbility) {
             this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;

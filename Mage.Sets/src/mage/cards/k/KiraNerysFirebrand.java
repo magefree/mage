@@ -63,6 +63,7 @@ class KiraNerysFirebrandEffect extends ReplacementEffectImpl {
 
     protected KiraNerysFirebrandEffect(final KiraNerysFirebrandEffect effect) {
         super(effect);
+        staticText = "If a creature you control would enter while you control an attacking creature, instead it enters tapped and attacking.";
     }
 
     @Override

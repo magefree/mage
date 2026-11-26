@@ -68,22 +68,29 @@ class SphinxsDecreeEffect extends OneShotEffect {
 
 class SphinxsDecreeCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    int playersNextTurn;
-
-    public SphinxsDecreeCantCastEffect() {
-        super(Duration.Custom, Outcome.Detriment);
+    SphinxsDecreeCantCastEffect() {
+        super(Duration.UntilEndOfYourNextTurn, Outcome.Detriment);
         staticText = "You can't cast instant or sorcery spells during this turn";
-        playersNextTurn = 0;
     }
 
     private SphinxsDecreeCantCastEffect(final SphinxsDecreeCantCastEffect effect) {
         super(effect);
-        this.playersNextTurn = effect.playersNextTurn;
     }
 
     @Override
     public SphinxsDecreeCantCastEffect copy() {
         return new SphinxsDecreeCantCastEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        UUID opponentId = getTargetPointer().getFirst(game, source);
+        if (opponentId != null) {
+            setStartingControllerAndTurnNum(game, opponentId, game.getActivePlayerId()); // setup startingController to calc isYourTurn calls
+        } else {
+            discard();
+        }
     }
 
     @Override
@@ -102,26 +109,10 @@ class SphinxsDecreeCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        UUID opponentId = getTargetPointer().getFirst(game, source);
-        if (game.isActivePlayer(opponentId)) {
-            if (playersNextTurn == 0) {
-                playersNextTurn = game.getTurnNum();
-            }
-            if (playersNextTurn == game.getTurnNum()) {
-                if (opponentId.equals(event.getPlayerId())) {
-                    MageObject object = game.getObject(event.getSourceId());
-                    if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-                        if (object != null && object.isInstantOrSorcery(game)) {
-                            return true;
-                        }
-                    }
-                }
-            } else {
-                discard();
-            }
-        } else if (playersNextTurn > 0) {
-            discard();
+        if (!isYourNextTurn(game) || !event.getPlayerId().equals(getTargetPointer().getFirst(game, source))) {
+            return false;
         }
-        return false;
+        MageObject object = game.getObject(event.getSourceId());
+        return object != null && object.isInstantOrSorcery(game);
     }
 }

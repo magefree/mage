@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
-import mage.filter.FilterStackObject;
-import mage.filter.common.FilterActivatedOrTriggeredAbility;
+import mage.filter.FilterAbility;
 import mage.filter.predicate.other.NotManaAbilityPredicate;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class RingsOfBrighthearth extends CardImpl {
-    private static final FilterStackObject filter = new FilterActivatedOrTriggeredAbility("an ability, if it isn't a mana ability");
+    private static final FilterAbility filter = new FilterAbility("an ability, if it isn't a mana ability");
 
     static {
         filter.add(NotManaAbilityPredicate.instance);

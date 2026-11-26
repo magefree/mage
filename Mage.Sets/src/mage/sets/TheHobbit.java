@@ -27,6 +27,9 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("An Unexpected Party", 29, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("An Unexpected Party", 289, Rarity.RARE, mage.cards.a.AnUnexpectedParty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Attercop", 116, Rarity.COMMON, mage.cards.a.Attercop.class));
+        cards.add(new SetCardInfo("Azog, Moria's Ruin", 61, Rarity.RARE, mage.cards.a.AzogMoriasRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Azog, Moria's Ruin", 222, Rarity.RARE, mage.cards.a.AzogMoriasRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Azog, Moria's Ruin", 258, Rarity.RARE, mage.cards.a.AzogMoriasRuin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balin, Loremaster", 87, Rarity.RARE, mage.cards.b.BalinLoremaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balin, Loremaster", 301, Rarity.RARE, mage.cards.b.BalinLoremaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bard, King of Dale", 144, Rarity.MYTHIC, mage.cards.b.BardKingOfDale.class, NON_FULL_USE_VARIOUS));
@@ -101,6 +104,8 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Shortsword", 10, Rarity.COMMON, mage.cards.d.DwarvenShortsword.class));
         cards.add(new SetCardInfo("Eagle of the Great Shelf", 11, Rarity.UNCOMMON, mage.cards.e.EagleOfTheGreatShelf.class));
         cards.add(new SetCardInfo("Eagle's Rescue", 155, Rarity.UNCOMMON, mage.cards.e.EaglesRescue.class));
+        cards.add(new SetCardInfo("Elrond, Moon-Reader", 36, Rarity.MYTHIC, mage.cards.e.ElrondMoonReader.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Elrond, Moon-Reader", 290, Rarity.MYTHIC, mage.cards.e.ElrondMoonReader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elven Passage", 274, Rarity.RARE, mage.cards.e.ElvenPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elven Passage", 238, Rarity.RARE, mage.cards.e.ElvenPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elven Passage", 181, Rarity.RARE, mage.cards.e.ElvenPassage.class, NON_FULL_USE_VARIOUS));
@@ -323,5 +328,6 @@ public final class TheHobbit extends ExpansionSet {
         cards.add(new SetCardInfo("Wizard's Staff", 59, Rarity.RARE, mage.cards.w.WizardsStaff.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wizard's Staff", 294, Rarity.RARE, mage.cards.w.WizardsStaff.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wood Elves", 142, Rarity.COMMON, mage.cards.w.WoodElves.class));
+        cards.add(new SetCardInfo("Woodland Weavemaster", 143, Rarity.UNCOMMON, mage.cards.w.WoodlandWeavemaster.class));
     }
 }

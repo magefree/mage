@@ -605,6 +605,7 @@ public class ScryfallImageSupportCards {
             add("FCA"); // Final Fantasy: Through the Ages
             add("PSS5"); // FIN Standard Showdown
             add("EOE"); // Edge of Eternities
+            add("YEOE"); // Alchemy: Edge of Eternities
             add("EOC"); // Edge of Eternities Commander
             add("EOS"); // Edge of Eternities: Stellar Sights
             add("SPM"); // Marvel's Spider-Man
@@ -637,6 +638,9 @@ public class ScryfallImageSupportCards {
             add("TRC"); // Star Trek Commander
             add("SDS"); // Stardates
             add("PF27"); // MagicFest 2027
+            add("PW27"); // Wizards Play Network 2027
+            add("NAU"); // Nauctis: The Sunken Realm
+            add("NAC"); // Nauctis: The Sunken Realm Commander
             add("MDD"); // Marvel: Darkhold Destiny
             add("MDC"); // Darkhold Destiny Commander
 

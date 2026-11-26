@@ -58,7 +58,7 @@ enum LavaballTrapCondition implements Condition {
         Player controller = game.getPlayer(source.getControllerId());
         PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
         if (watcher != null && controller != null) {
-            for (UUID opponentId : game.getOpponents(controller.getId())) {
+            for (UUID opponentId : game.getOpponents(controller.getId(), false)) {
                 List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
                 if (permanents != null) {
                     int count = 0;

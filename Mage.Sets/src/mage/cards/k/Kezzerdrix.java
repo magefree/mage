@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class Kezzerdrix extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            new FilterOpponentsCreaturePermanent("your opponents control no creatures"), ComparisonType.EQUAL_TO, 0
+            new FilterOpponentsCreaturePermanent("your opponents control no creatures"), ComparisonType.EQUAL_TO, 0, false
     );
 
     public Kezzerdrix(UUID ownerId, CardSetInfo setInfo) {

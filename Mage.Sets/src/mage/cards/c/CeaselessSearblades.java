@@ -68,16 +68,11 @@ class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         // can be normal and mana abilities
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY || event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && game.inCheckPlayableState()) {
-            // ignore mana abilities on playable checking
-            return false;
-        }
-
         Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return event.getPlayerId().equals(getControllerId())
                 && source != null

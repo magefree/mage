@@ -2235,6 +2235,10 @@ public abstract class GameImpl implements Game {
 
         // if it was no copy of copy take the target itself
         if (newBluePrint == null) {
+            if (copyFromPermanent.isCopy() && copyFromPermanent.getCopyFrom() instanceof Permanent) {
+                // copy effect is no longer active (e.g. source is LKI), use the original copy link
+                copyFromPermanent = (Permanent) copyFromPermanent.getCopyFrom();
+            }
             newBluePrint = copyFromPermanent.copy();
 
             // reset to original characteristics
@@ -2608,14 +2612,12 @@ public abstract class GameImpl implements Game {
         );
         Set<Card> copiedCardsToRemove = new HashSet<>();
         for (Card copiedCard : allCopiedCards) {
-            UUID copiedCardId = copiedCard.getMainCard().getId();
-            UUID persistentCopySource = state.getPersistentCardCopySource(copiedCardId);
-            if (persistentCopySource != null) {
-                // Persistent copies opt out of 704.5e only while their registered source remains.
-                if (getPermanent(persistentCopySource) != null) {
-                    continue;
-                }
-                state.stopKeepingCardCopy(copiedCardId);
+            // 722.3c
+            // This copy remains in exile for as long as the prepared permanent remains on the battlefield and has
+            // the prepared designation. This is an exception to rule 704.5e.
+            if (copiedCard instanceof PreparedSpellCopy
+                    && ((PreparedSpellCopy) copiedCard).getPreparedPermanent(this) != null) {
+                continue;
             }
             // 1. Zone must be checked from main card only cause mdf parts can have different zones
             //    (one side on battlefield, another side on outside)
@@ -2771,7 +2773,8 @@ public abstract class GameImpl implements Game {
             }
             if (perm.isPlaneswalker(this)) {
                 //20091005 - 704.5i
-                if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0) {
+                if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0
+                        && perm.zeroLoyaltyRuleApplies()) {
                     if (movePermanentToGraveyardWithInfo(perm, "SBA: planeswalker has loyalty 0")) {
                         somethingHappened = true;
                         continue;
