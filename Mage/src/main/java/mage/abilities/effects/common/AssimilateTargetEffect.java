@@ -1,9 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -16,13 +12,29 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.*;
 
 /**
- * @author muz
+ * 701.72. Assimilate
+ * <p>
+ * 701.72a To assimilate a permanent, gain control of it and put a +1/+1 counter on it. It becomes
+ * a Borg artifact creature.
+ * <p>
+ * 701.72b To assimilate a permanent card that’s in a zone other than the battlefield, put it onto
+ * the battlefield under your control with a +1/+1 counter on it. It’s a Borg artifact creature.
+ * <p>
+ * 701.72c An object may have an ability printed on it that assimilates another object and another
+ * ability that refers to permanents “assimilated with [this object].” These abilities are linked;
+ * the second refers only to permanents that have been assimilated due to the first. See rule 607,
+ * “Linked Abilities.”
+ *
+ * @author muz, JayDi85
  */
 public class AssimilateTargetEffect extends OneShotEffect {
 
-     public AssimilateTargetEffect() {
+    public AssimilateTargetEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 
@@ -42,26 +54,40 @@ public class AssimilateTargetEffect extends OneShotEffect {
             return false;
         }
 
+        Set<Card> cardsToMove = new LinkedHashSet<>();
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Card card = game.getCard(targetId);
+            if (card != null && game.getState().getZone(card.getId()) != Zone.BATTLEFIELD) {
+                cardsToMove.add(card);
+            }
+        }
+        return assimilateCards(controller, cardsToMove, source, game);
+    }
+
+    public static boolean assimilateCard(Player controller, Card card, Ability source, Game game) {
+        if (controller == null || card == null) {
+            return false;
+        }
+        return assimilateCards(controller, Collections.singleton(card), source, game);
+    }
+
+    public static boolean assimilateCards(Player controller, Set<Card> cardsToMove, Ability source, Game game) {
+        if (controller == null || cardsToMove.isEmpty()) {
+            return false;
+        }
+
         Counters counters = new Counters();
         counters.addCounter(CounterType.P1P1.createInstance());
 
-        Set<Card> cardsToMove = new HashSet<>();
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            Card card = game.getCard(targetId);
-            if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-                cardsToMove.add(card);
-                game.setEnterWithCounters(targetId, counters.copy());
+        for (Card card : cardsToMove) {
+            Card enterCard = CardUtil.getDefaultCardSideForBattlefield(game, card);
+            game.setEnterWithCounters(enterCard.getId(), counters.copy());
 
-                // Apply the continuous effect before moving the card to have the proper types on entering.
-                AssimilateContinuousEffect continuousEffect = new AssimilateContinuousEffect(
-                    new MageObjectReference(card, game, 1)
-                );
-                game.addEffect(continuousEffect, source);
-            }
+            // Apply the continuous effect before moving the card to have the proper types on entering.
+            game.addEffect(new AssimilateContinuousEffect(new MageObjectReference(enterCard, game, 1)), source);
         }
-        controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game, false, false, false, null);
 
-        return true;
+        return controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game, false, false, false, null);
     }
 
     @Override
@@ -69,14 +95,9 @@ public class AssimilateTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("assimilate ");
-        String targetName = mode.getTargets().isEmpty()
-                ? "target"
-                : mode.getTargets().get(0).getTargetName();
-        sb.append(targetName);
-        sb.append(". <i>(Put it onto the battlefield under your control with a +1/+1 counter. "
-            + "It's a Borg artifact creature and loses all other creature types.)</i>");
-        return sb.toString();
+        return "assimilate "
+                + getTargetPointer().describeTargets(mode.getTargets(), "that card")
+                + ". <i>(Put it onto the battlefield under your control with a +1/+1 counter. "
+                + "It's a Borg artifact creature and loses all other creature types.)</i>";
     }
 }
