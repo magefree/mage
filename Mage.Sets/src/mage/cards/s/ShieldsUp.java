@@ -77,7 +77,7 @@ class ShieldsUpEffect extends OneShotEffect {
         return Optional
                 .ofNullable(getTargetPointer().getFirst(game, source))
                 .map(game::getPermanent)
-                .filter(permanent -> permanent.isCreature())
+                .filter(permanent -> permanent.isCreature(game))
                 .filter(permanent -> permanent.addCounters(CounterType.P1P1.createInstance(), source, game))
                 .isPresent();
     }
