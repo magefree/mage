@@ -37,33 +37,36 @@ public class LondonMulliganTest extends MulliganTestBase {
         Set<UUID> hand1 = new HashSet<>();
         Set<UUID> hand2 = new HashSet<>();
         List<UUID> discarded = new ArrayList<>();
+        List<UUID> bottomed = new ArrayList<>();
         Set<UUID> remainingHand = new HashSet<>();
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
             hand1.addAll(scenario.getHand());
             return true;
         });
+        scenario.mulligan(() -> {
+            scenario.assertSizes(7, 33);
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
+            hand2.addAll(scenario.getHand());
+            return false;
+        });
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
             assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
+            assertEquals(hand2, scenario.getHand());
             scenario.getHand().stream().limit(count).forEach(discarded::add);
+            bottomed.addAll(discarded);
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
-        scenario.mulligan(() -> {
-            scenario.assertSizes(6, 34);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
-            assertEquals(remainingHand, scenario.getHand());
-            hand2.addAll(scenario.getHand());
-            return false;
-        });
         scenario.run(() -> {
             scenario.assertSizes(6, 34);
-            assertEquals(remainingHand, new HashSet<>(scenario.getHand()));
+            assertEquals(remainingHand, scenario.getHand());
             assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
-            assertEquals(hand2, scenario.getHand());
+            assertEquals(hand2, Sets.union(remainingHand, new HashSet<>(discarded)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
+            assertEquals(bottomed, scenario.getNBottomOfLibrary(1));
         });
     }
 
@@ -74,35 +77,33 @@ public class LondonMulliganTest extends MulliganTestBase {
         Set<UUID> hand2 = new HashSet<>();
         Set<UUID> hand3 = new HashSet<>();
         List<UUID> discarded = new ArrayList<>();
+        List<UUID> bottomed = new ArrayList<>();
         Set<UUID> remainingHand = new HashSet<>();
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
             hand1.addAll(scenario.getHand());
             return true;
         });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(7, 33);
-            assertEquals(1, count);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
-            scenario.getHand().stream().limit(count).forEach(discarded::add);
-            remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
-            return discarded;
-        });
         scenario.mulligan(() -> {
-            scenario.assertSizes(6, 34);
+            scenario.assertSizes(7, 33);
             assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             hand2.addAll(scenario.getHand());
             return true;
         });
+        scenario.mulligan(() -> {
+            scenario.assertSizes(7, 33);
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
+            hand3.addAll(scenario.getHand());
+            return false;
+        });
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
             assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
-            assertEquals(discarded, scenario.getLibraryRangeSize(33-getCardsPerMull(), 1));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(34-getCardsPerMull(), 6)));
-            discarded.clear();
-            remainingHand.clear();
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             scenario.getHand().stream().limit(count).forEach(discarded::add);
+            bottomed.addAll(discarded);
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
@@ -110,29 +111,23 @@ public class LondonMulliganTest extends MulliganTestBase {
             scenario.assertSizes(6, 34);
             assertEquals(1, count);
             assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(34-getCardsPerMull(), 6)));
             discarded.clear();
             remainingHand.clear();
             scenario.getHand().stream().limit(count).forEach(discarded::add);
+            bottomed.addAll(discarded);
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
-        scenario.mulligan(() -> {
-            scenario.assertSizes(5, 35);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(34-getCardsPerMull(), 6)));
-            assertEquals(discarded, scenario.getNBottomOfLibrary(1));
-            hand3.addAll(scenario.getHand());
-            return false;
-        });
         scenario.run(() -> {
             scenario.assertSizes(5, 35);
-            assertEquals(remainingHand, new HashSet<>(scenario.getHand()));
+            assertEquals(remainingHand, scenario.getHand());
             assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(34-getCardsPerMull(), 6)));
-            assertEquals(hand3, scenario.getHand());
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
+            assertEquals(hand3, Sets.union(remainingHand, new HashSet<>(bottomed)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
+            assertEquals(bottomed, scenario.getNBottomOfLibrary(2));
         });
     }
 
@@ -170,7 +165,7 @@ public class LondonMulliganTest extends MulliganTestBase {
         scenario.run(() -> {
             scenario.assertSizes(7, 33);
             assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
-            assertEquals(hand2, new HashSet<>(scenario.getHand()));
+            assertEquals(hand2, scenario.getHand());
         });
     }
 
@@ -193,6 +188,13 @@ public class LondonMulliganTest extends MulliganTestBase {
             hand2.addAll(scenario.getHand());
             return true;
         });
+        scenario.mulligan(() -> {
+            scenario.assertSizes(7, 33);
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
+            hand3.addAll(scenario.getHand());
+            return false;
+        });
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
@@ -202,20 +204,12 @@ public class LondonMulliganTest extends MulliganTestBase {
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
-        scenario.mulligan(() -> {
-            scenario.assertSizes(6, 34);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
-            assertEquals(discarded, scenario.getNBottomOfLibrary(1));
-            hand3.addAll(scenario.getHand());
-            return false;
-        });
         scenario.run(() -> {
             scenario.assertSizes(6, 34);
+            assertEquals(remainingHand, scenario.getHand());
             assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
             assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
-            assertEquals(hand3, scenario.getHand());
-            assertEquals(remainingHand, new HashSet<>(scenario.getHand()));
+            assertEquals(hand3, Sets.union(remainingHand, new HashSet<>(discarded)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
         });
     }
@@ -223,6 +217,32 @@ public class LondonMulliganTest extends MulliganTestBase {
     @Test
     public void testLondonMulligan_AlwaysMulligan() {
         MulliganScenarioTest scenario = new MulliganScenarioTest(getMullType(), 0);
+        List<UUID> bottomed = new ArrayList<>();
+        List<UUID> handAtKeep = new ArrayList<>();
+        scenario.mulligan(() -> {
+            scenario.assertSizes(7, 33);
+            return true;
+        });
+        scenario.mulligan(() -> {
+            scenario.assertSizes(7, 33);
+            return true;
+        });
+        scenario.mulligan(() -> {
+            scenario.assertSizes(7, 33);
+            return true;
+        });
+        scenario.mulligan(() -> {
+            scenario.assertSizes(7, 33);
+            return true;
+        });
+        scenario.mulligan(() -> {
+            scenario.assertSizes(7, 33);
+            return true;
+        });
+        scenario.mulligan(() -> {
+            scenario.assertSizes(7, 33);
+            return true;
+        });
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
             return true;
@@ -230,169 +250,59 @@ public class LondonMulliganTest extends MulliganTestBase {
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.mulligan(() -> {
-            scenario.assertSizes(6, 34);
-            return true;
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(7, 33);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            if (bottomed.isEmpty()) {
+                handAtKeep.addAll(scenario.getHand());
+            }
+            List<UUID> chosen = scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            bottomed.addAll(chosen);
+            return chosen;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(6, 34);
             assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.mulligan(() -> {
-            scenario.assertSizes(5, 35);
-            return true;
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(7, 33);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(6, 34);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(5, 35);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.mulligan(() -> {
-            scenario.assertSizes(4, 36);
-            return true;
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(7, 33);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(6, 34);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            List<UUID> chosen = scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            bottomed.addAll(chosen);
+            return chosen;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(5, 35);
             assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            List<UUID> chosen = scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            bottomed.addAll(chosen);
+            return chosen;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(4, 36);
             assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.mulligan(() -> {
-            scenario.assertSizes(3, 37);
-            return true;
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(7, 33);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(6, 34);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(5, 35);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(4, 36);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            List<UUID> chosen = scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            bottomed.addAll(chosen);
+            return chosen;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(3, 37);
             assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.mulligan(() -> {
-            scenario.assertSizes(2, 38);
-            return true;
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(7, 33);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(6, 34);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(5, 35);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(4, 36);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(3, 37);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            List<UUID> chosen = scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            bottomed.addAll(chosen);
+            return chosen;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(2, 38);
             assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.mulligan(() -> {
-            scenario.assertSizes(1, 39);
-            return true;
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(7, 33);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(6, 34);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(5, 35);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(4, 36);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(3, 37);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
-        });
-        scenario.discardBottom(count -> {
-            scenario.assertSizes(2, 38);
-            assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            List<UUID> chosen = scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            bottomed.addAll(chosen);
+            return chosen;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(1, 39);
             assertEquals(1, count);
-            return scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            List<UUID> chosen = scenario.getHand().stream().limit(count).collect(Collectors.toList());
+            bottomed.addAll(chosen);
+            return chosen;
         });
         scenario.run(() -> {
             scenario.assertSizes(0, 40);
+            assertEquals(bottomed, scenario.getNBottomOfLibrary(7));
+            assertEquals(new HashSet<>(handAtKeep), new HashSet<>(bottomed));
         });
     }
 }
