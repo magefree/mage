@@ -900,7 +900,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         sliderPanel.add(cardSizeSliderLabel);
         sliderPanel.add(cardSizeSlider);
         toolbar.add(sliderPanel, BorderLayout.EAST);
-        this.add(toolbar, BorderLayout.NORTH);
+        this.add(mage.client.util.gui.GuiDisplayUtil.createHorizontalScrollPane(toolbar), BorderLayout.NORTH);
 
         // Insert arrow
         insertArrow = new JLabel();
