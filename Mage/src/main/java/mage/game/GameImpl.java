@@ -4242,16 +4242,17 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void setEnterWithCounters(UUID sourceId, Counters counters) {
+        UUID key = CardUtil.getMainCardId(this, sourceId);
         if (counters == null) {
-            enterWithCounters.remove(sourceId);
+            enterWithCounters.remove(key);
             return;
         }
-        enterWithCounters.put(sourceId, counters);
+        enterWithCounters.put(key, counters);
     }
 
     @Override
     public Counters getEnterWithCounters(UUID sourceId) {
-        return enterWithCounters.get(sourceId);
+        return enterWithCounters.get(CardUtil.getMainCardId(this, sourceId));
     }
 
     private Map<String, Serializable> addMessageToOptions(MessageToClient message, Map<String, Serializable> options) {
