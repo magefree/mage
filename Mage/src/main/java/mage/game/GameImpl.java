@@ -3856,6 +3856,13 @@ public abstract class GameImpl implements Game {
     public void resetShortLivingLKI() {
         lkiShortLiving.clear();
         targetedMap.clear();
+
+        // etb counters can be setup by enterWithCounters, but it must be cleanup after good/bad move
+        // TODO: remove after etb with counter rework and combined for cards/tokens inside ZoneChangeInfo.Battlefield, see #10786
+        if (getPermanentsEntering().isEmpty()) {
+            // make sure not inside a batch entering, e.g. Devour
+            enterWithCounters.clear();
+        }
     }
 
     @Override
