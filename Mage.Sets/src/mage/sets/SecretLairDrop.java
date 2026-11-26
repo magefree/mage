@@ -1610,6 +1610,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Pack Rat", 1307, Rarity.RARE, mage.cards.p.PackRat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pack Rat", 1448, Rarity.RARE, mage.cards.p.PackRat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pack Rat", 35, Rarity.RARE, mage.cards.p.PackRat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Padishah Emperor Shaddam IV", 2914, Rarity.MYTHIC, mage.cards.p.PadishahEmperorShaddamIV.class));
         cards.add(new SetCardInfo("Painful Truths", 2302, Rarity.RARE, mage.cards.p.PainfulTruths.class));
         cards.add(new SetCardInfo("Palladia-Mors", 1071, Rarity.RARE, mage.cards.p.PalladiaMors.class));
         cards.add(new SetCardInfo("Panharmonicon", 605, Rarity.RARE, mage.cards.p.Panharmonicon.class));
