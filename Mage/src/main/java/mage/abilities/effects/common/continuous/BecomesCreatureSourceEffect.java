@@ -84,7 +84,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet()) {
-            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+            affectedObjectList.add(new MageObjectReference(source, game));
         }
     }
 

@@ -46,7 +46,31 @@ public class AngelicDestinyTest extends CardTestPlayerBase {
         
         assertGraveyardCount(playerA, "Angelic Destiny", 0);
         assertHandCount(playerA, "Angelic Destiny", 1);
-        
+
+    }
+
+    /**
+     * Destroyed together with the creature, then exiled from the graveyard in response: it stays in exile.
+     */
+    @Test
+    public void testExiledFromGraveyardInResponse() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 11);
+        addCard(Zone.HAND, playerA, "Angelic Destiny"); // {2}{W}{W}
+        addCard(Zone.HAND, playerA, "Akroma's Vengeance"); // {4}{W}{W}: Destroy all artifacts, creatures, and enchantments.
+        addCard(Zone.HAND, playerA, "Purify the Grave"); // {W}: Exile target card from a graveyard.
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angelic Destiny", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma's Vengeance");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Purify the Grave", "Angelic Destiny", "When enchanted creature dies");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerA, "Angelic Destiny", 1);
+        assertHandCount(playerA, "Angelic Destiny", 0);
     }
 
 }

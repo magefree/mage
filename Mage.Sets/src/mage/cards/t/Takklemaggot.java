@@ -96,7 +96,7 @@ class TakklemaggotEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Card auraCard = game.getCard(source.getSourceId());
+        Card auraCard = DiesAttachedTriggeredAbility.getAttachmentCardInGraveyard(game, source);
         if (controller == null || player == null || auraCard == null) {
             return false;
         }

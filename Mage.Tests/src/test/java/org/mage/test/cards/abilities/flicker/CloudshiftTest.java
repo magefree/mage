@@ -1,9 +1,11 @@
 package org.mage.test.cards.abilities.flicker;
 
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
@@ -477,6 +479,75 @@ public class CloudshiftTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, kor, 2, 1);
         assertLife(playerA, 24);
 
+    }
+
+    /**
+     * A pump activated before the flicker resolves after it: the Shade that comes back is a new
+     * object (400.7), so "{this} gets +1/+1" has nothing left to apply to.
+     */
+    @Test
+    public void testSourcePumpFlickeredInResponse() {
+        addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Frozen Shade"); // 0/1, {B}: +1/+1 until end of turn
+        addCard(Zone.HAND, playerA, "Cloudshift");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{B}:");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Frozen Shade", "{B}:");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Cloudshift", 1);
+        assertPowerToughness(playerA, "Frozen Shade", 0, 1);
+    }
+
+    /**
+     * Same for a gained ability that lasts while it's on the battlefield: the Dragon that comes back is a
+     * new object, and only an activation after the flicker applies to it.
+     */
+    @Test
+    public void testSourceGainsAbilityFlickeredInResponse() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Mist Dragon"); // {0}: gains flying, lasts indefinitely
+        addCard(Zone.HAND, playerA, "Cloudshift");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: {this} has");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Mist Dragon", "{0}: {this} has");
+        checkAbility("flickered in response", 1, PhaseStep.BEGIN_COMBAT, playerA, "Mist Dragon", FlyingAbility.class, false);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{0}: {this} has");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertAbility(playerA, "Mist Dragon", FlyingAbility.getInstance(), true);
+    }
+
+    /**
+     * 611.2b: "if that duration ends before the moment the effect would first be applied [...], the effect
+     * does nothing." The Liege that comes back is a new object, so only its own activation turns the land.
+     */
+    @Test
+    public void testUntilSourceLeavesFlickeredInResponse() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest"); // keeps the 0/0 Liege alive
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Gaea's Liege"); // {T}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.
+        addCard(Zone.BATTLEFIELD, playerB, "Island");
+        addCard(Zone.HAND, playerA, "Cloudshift");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target land", "Island");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Gaea's Liege", "{T}: Target land");
+        checkSubType("flickered in response", 1, PhaseStep.BEGIN_COMBAT, playerB, "Island", SubType.FOREST, false);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target land", "Island");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertSubtype("Island", SubType.FOREST);
     }
 
 }

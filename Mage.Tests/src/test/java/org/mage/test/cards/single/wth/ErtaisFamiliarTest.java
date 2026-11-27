@@ -103,4 +103,31 @@ public class ErtaisFamiliarTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 3 * 2 + 1); // 2 familiar trigger + Blur
         assertPermanentCount(playerA, familiar, 0);
     }
+
+    /**
+     * The Familiar that comes back from Blur is a new object (400.7), so an activation from before it left
+     * doesn't stop it from phasing out.
+     */
+    @Test
+    public void test_activate_cant_phaseout_blinked_in_response() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, familiar);
+        // Exile target creature you control, then return that card to the battlefield under its owner’s control.
+        // Draw a card.
+        addCard(Zone.HAND, playerA, "Blur");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+
+        // Casting the familiar for it to not start phasing out turn 1.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, familiar);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}:");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Blur", familiar, "{U}:");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, 3 * 2 + 1); // 2 familiar trigger + Blur
+        assertPermanentCount(playerA, familiar, 0);
+    }
 }

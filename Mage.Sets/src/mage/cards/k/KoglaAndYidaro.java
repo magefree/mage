@@ -92,7 +92,7 @@ class KoglaAndYidaroEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObjectReference mor = new MageObjectReference(source, 1);
+        MageObjectReference mor = new MageObjectReference(source, game, 1);
         return player != null
                 && mor.zoneCounterIsCurrent(game)
                 && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD

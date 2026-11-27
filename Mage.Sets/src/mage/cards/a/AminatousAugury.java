@@ -216,7 +216,7 @@ class AminatousAuguryWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
-        List<Set<CardType>> castCardTypes = morMap.get(new MageObjectReference(event.getApprovingObject().getApprovingAbility()));
+        List<Set<CardType>> castCardTypes = morMap.get(new MageObjectReference(event.getApprovingObject().getApprovingAbility(), game));
         Spell spell = game.getSpell(event.getTargetId());
         if (castCardTypes == null || spell == null) {
             return;
@@ -235,13 +235,13 @@ class AminatousAuguryWatcher extends Watcher {
         game.getState()
                 .getWatcher(AminatousAuguryWatcher.class)
                 .morMap
-                .computeIfAbsent(new MageObjectReference(source), m -> new ArrayList<>());
+                .computeIfAbsent(new MageObjectReference(source, game), m -> new ArrayList<>());
     }
 
     static List<Set<CardType>> getCastCardTypes(Ability source, Game game) {
         return game.getState()
                 .getWatcher(AminatousAuguryWatcher.class)
                 .morMap
-                .getOrDefault(new MageObjectReference(source), Collections.emptyList());
+                .getOrDefault(new MageObjectReference(source, game), Collections.emptyList());
     }
 }

@@ -88,7 +88,7 @@ class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
     private final Set<UUID> tokens = new HashSet<>();
 
     public TatsumaTheDragonsFangTriggeredAbility(Token token, Ability source, Game game) {
-        super(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).setTargetPointer(new FixedTarget(new MageObjectReference(source, 1))), Duration.Custom, false, false);
+        super(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).setTargetPointer(new FixedTarget(new MageObjectReference(source, game, 1))), Duration.Custom, false, false);
         tokens.addAll(token.getLastAddedTokenIds());
     }
 

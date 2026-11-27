@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
@@ -83,12 +84,10 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         if (creatureDied.getAttachments().contains(this.getSourceId())) {
             triggered = true;
         } else {
-            // If the attachment and attachedTo went to graveyard at the same time, the trigger applies.
-            // If the attachment is removed beforehand, the trigger fails.
-            // IE: A player cast Planar Clensing.  The attachment is Disenchanted in reponse
-            // and successfully removed from the attachedTo.  The trigger fails.
+            // The attachment left first, in the same event (Pernicious Deed), so it's no longer listed on the
+            // creature. If it was removed beforehand instead (Disenchant in response to Planar Cleansing),
+            // isInUseableZone has already rejected the trigger: its short-living LKI is gone by then.
             Permanent attachment = getSourcePermanentOrLKI(game);
-            Card attachmentCard = game.getCard(getSourceId());
             if (attachment != null
                     && zEvent.getTargetId() != null
                     && attachment.getAttachedTo() != null
@@ -96,9 +95,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
                 Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
                 if (attachedTo != null
                         && game.getState().getZone(attachedTo.getId()) == (Zone.GRAVEYARD)  // Demonic Vigor
-                        && attachmentCard != null
-                        && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)
-                        && attachment.getZoneChangeCounter(game) == attachmentCard.getZoneChangeCounter(game)) {
+                        && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)) {
                     triggered = true;
                 }
             }
@@ -125,6 +122,38 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return true;
+    }
+
+    /**
+     * Ties the ability to the attachment as it was on the battlefield when the creature died. Without this, the
+     * tie depends on whether the attachment's own move was processed before the creature's, which varies with
+     * how they left (a lone destroy, a destroy-all, state-based actions).
+     */
+    @Override
+    public void initSourceObjectZoneChangeCounter(Game game) {
+        if (getStackMomentSourceZCC() == 0) {
+            Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
+            if (attachment != null) {
+                setSourceObjectZoneChangeCounter(attachment.getZoneChangeCounter(game));
+            }
+        }
+        super.initSourceObjectZoneChangeCounter(game);
+    }
+
+    /**
+     * For an ability created by this trigger, finds the card an Aura became in its owner's graveyard (400.7f),
+     * whether it went there with the creature or afterwards as a state-based action.
+     *
+     * @return null if that card has left the graveyard since
+     */
+    public static Card getAttachmentCardInGraveyard(Game game, Ability source) {
+        Card card = game.getCard(source.getSourceId());
+        if (card == null
+                || game.getState().getZone(card.getId()) != Zone.GRAVEYARD
+                || card.getZoneChangeCounter(game) != source.getStackMomentSourceZCC() + 1) {
+            return null;
+        }
+        return card;
     }
 
     private String generateTriggerPhrase() {

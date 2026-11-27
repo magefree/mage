@@ -2118,7 +2118,10 @@ public abstract class GameImpl implements Game {
     @Override
     public void addEffect(ContinuousEffect continuousEffect, Ability source) {
         Ability newAbility = source.copy();
-        newAbility.initSourceObjectZoneChangeCounter(this, true);
+        // 400.7: the effect refers to the object the ability knew, so keep the ability's counter --
+        // a source that changed zones since is a new object. A static ability has none yet (0), and
+        // takes the current one here, entering permanents included.
+        newAbility.initSourceObjectZoneChangeCounter(this);
         ContinuousEffect newEffect = continuousEffect.copy();
 
         newEffect.newId();
@@ -2319,14 +2322,14 @@ public abstract class GameImpl implements Game {
             // countered, or otherwise responded to. Rather, it resolves immediately after the mana
             // ability that triggered it, without waiting for priority.
             Ability manaAbility = ability.copy();
-            manaAbility.initSourceObjectZoneChangeCounter(this, false);
+            manaAbility.initSourceObjectZoneChangeCounter(this);
             if (manaAbility.activate(this, false)) {
                 manaAbility.resolve(this);
             }
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
-            newAbility.initSourceObjectZoneChangeCounter(this, false);
+            newAbility.initSourceObjectZoneChangeCounter(this);
             if (!(newAbility instanceof DelayedTriggeredAbility)) {
                 newAbility.setSourcePermanentTransformCount(this);
             }
@@ -2393,15 +2396,10 @@ public abstract class GameImpl implements Game {
             // The controller of that delayed triggered ability is the same as the controller of that object at the time
             // the replacement effect was applied.
             //
-            // There are two possibility for the zcc:
-            // 1/ the source is an Ability with a valid (not 0) zcc, and we must use the same.
-            int zcc = source.getStackMomentSourceZCC();
-            if (zcc == 0) {
-                // 2/ the source has not a valid zcc (it is most likely a StaticAbility instantiated at beginning of game)
-                //    we use the source objects's zcc
-                zcc = getState().getZoneChangeCounter(source.getSourceId());
-            }
-            newAbility.setSourceObjectZoneChangeCounter(zcc);
+            // So it refers to the object its source ability knew. A static source has none: take the current
+            // object, which for a permanent that is entering is the permanent it becomes.
+            newAbility.setSourceObjectZoneChangeCounter(source.getStackMomentSourceZCC());
+            newAbility.initSourceObjectZoneChangeCounter(this);
             newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.init(this);

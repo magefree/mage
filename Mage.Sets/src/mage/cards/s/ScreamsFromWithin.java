@@ -72,9 +72,9 @@ class ScreamsFromWithinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card aura = game.getCard(source.getSourceId());
+        Card aura = DiesAttachedTriggeredAbility.getAttachmentCardInGraveyard(game, source);
         Player player = game.getPlayer(source.getControllerId());
-        if (aura != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD && player != null && player.getGraveyard().contains(source.getSourceId())) {
+        if (aura != null && player != null && player.getGraveyard().contains(source.getSourceId())) {
             for (Permanent creaturePermanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 for (Target target : aura.getSpellAbility().getTargets()) {
                     if (target.canTarget(creaturePermanent.getId(), source, game)) {

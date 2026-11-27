@@ -35,6 +35,7 @@ import mage.game.GameState;
 import mage.game.command.Commander;
 import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
@@ -1239,6 +1240,8 @@ public final class CardUtil {
         game.getPermanentsEntering().put(permanent.getId(), permanent);
         permCard.applyEnterWithCounters(permanent, source, game);
         permanent.entersBattlefield(source, game, Zone.OUTSIDE, false);
+        // +1 zcc as on a real enter: abilities that triggered while entering (e.g. a Saga's chapter I) already expect it
+        permanent.updateZoneChangeCounter(game, new ZoneChangeEvent(permanent, source, player.getId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
         game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
         game.getPermanentsEntering().remove(permanent.getId());
 
@@ -1866,14 +1869,14 @@ public final class CardUtil {
     }
 
     /**
-     * Find actual ZCC of source object, works in any moment (even before source ability activated)
+     * The ZCC of the object the ability's source refers to: the ability's own ZCC once it is tied (activated,
+     * triggered, or copied for an effect), else the source's current ZCC. Untied abilities are common: a card's
+     * shared abilities are never tied, which includes static abilities and the trigger blueprints that check
+     * intervening-if conditions when they trigger. Copies are also untied while the engine checks whether they can
+     * be played, including whether they have legal targets.
      * <p>
-     * Use case for usage: if you want to get actual object ZCC before ability resolve
-     * (ability gets zcc after resolve/activate/trigger only -- ?wtf workaround to targets setup I think?)
-     *
-     * @param game
-     * @param source
-     * @return
+     * Unlike the tie, this doesn't count an entering permanent as entered: until the entry finishes, it gives
+     * the object it is entering from, which getSourceStackMomentReference relies on.
      */
     public static int getActualSourceObjectZoneChangeCounter(Game game, Ability source) {
         // current object zcc, find from source object (it can be permanent or spell on stack)

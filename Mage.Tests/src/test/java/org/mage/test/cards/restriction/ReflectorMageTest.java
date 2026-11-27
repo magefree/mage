@@ -68,4 +68,30 @@ public class ReflectorMageTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Bronze Sable", 1);
         assertPermanentCount(playerA, "Reflector Mage", 1);
     }
+
+    /**
+     * The restriction comes from a triggered ability, which exists independently of its source (113.7a), so it
+     * lasts after a token source has ceased to exist. It once stopped applying when the token was gone.
+     */
+    @Test
+    public void testRestrictionOutlastsTokenSource() {
+        addCard(Zone.BATTLEFIELD, playerA, "Reflector Mage");
+        // -2: Create a token that's a copy of target artifact or creature you control, except it's an artifact in
+        // addition to its other types. That token gains haste. Exile it at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Saheeli Rai");
+        addCard(Zone.BATTLEFIELD, playerB, "Bronze Sable"); // {2}
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes", 2);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2:", "Reflector Mage");
+        addTarget(playerA, "Bronze Sable"); // the token's enters trigger
+
+        checkPermanentCount("token exiled", 2, PhaseStep.UPKEEP, playerA, "Reflector Mage", 1);
+        checkPlayableAbility("sable not available", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Bronze Sable", false);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerB, "Bronze Sable", 1);
+    }
 }

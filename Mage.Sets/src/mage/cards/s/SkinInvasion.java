@@ -78,7 +78,7 @@ class SkinInvasionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
+        Card card = DiesAttachedTriggeredAbility.getAttachmentCardInGraveyard(game, source);
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
             game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId() + card.getZoneChangeCounter(game), Boolean.TRUE);

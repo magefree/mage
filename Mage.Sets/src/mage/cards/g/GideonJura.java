@@ -93,7 +93,7 @@ class GideonJuraEffect extends RequirementEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        creatingPermanent = new MageObjectReference(source.getSourceId(), game);
+        creatingPermanent = new MageObjectReference(source, game);
         setStartingControllerAndTurnNum(game, source.getFirstTarget(), game.getActivePlayerId()); // setup startingController to calc isYourTurn calls
     }
 

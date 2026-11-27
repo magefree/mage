@@ -81,12 +81,7 @@ enum OrvarTheAllFormCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
-        MageObjectReference mor;
-        if (source.getStackMomentSourceZCC() == 0) {
-            mor = new MageObjectReference(source.getSourceId(), game);
-        } else {
-            mor = new MageObjectReference(source);
-        }
+        MageObjectReference mor = new MageObjectReference(source, game);
         return spell != null && spell
                 .getSpellAbility()
                 .getModes()
@@ -151,7 +146,7 @@ class OrvarTheAllFormEffect extends OneShotEffect {
         }
         FilterPermanent filter = new FilterControlledPermanent("a permanent you control targeted by that spell");
         filter.add(Predicates.or(predicates));
-        filter.add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(source))));
+        filter.add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(source, game))));
         TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
         player.choose(outcome, target, source, game);

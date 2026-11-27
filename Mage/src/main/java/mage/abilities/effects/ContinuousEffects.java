@@ -433,6 +433,12 @@ public class ContinuousEffects implements Serializable {
         if (ability.getSourceId() == null) { // commander replacement effect
             return true;
         }
+        if (!(ability instanceof StaticAbility)) {
+            // 113.7a: a triggered or activated ability exists independently of its source, so its effects apply
+            // even when the source doesn't have that ability (a reflexive trigger's) or no longer exists (a token's).
+            // ContinuousEffectsList ends the effects whose duration is tied to the source.
+            return true;
+        }
         MageObject object;
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD

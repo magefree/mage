@@ -75,6 +75,34 @@ public class TakklemaggotTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 1);
     }
 
+    /**
+     * 2009-10-01 ruling: "When the ability resolves, if Takklemaggot is still in that graveyard, it's returned to
+     * the battlefield." Exiled from the graveyard in response, it stays in exile.
+     */
+    @Test
+    public void test_ExiledFromGraveyardInResponse() {
+        addCard(Zone.HAND, playerA, takklemaggot); // {2}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Tormod's Crypt"); // {T}, Sacrifice: Exile all cards from target player's graveyard.
+        //
+        addCustomEffect_TargetDestroy(playerA);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears"); // bear 2/2
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, takklemaggot, "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target destroy", "Grizzly Bears");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice", "targetPlayer=PlayerA", "When enchanted creature dies");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertExileCount(playerA, takklemaggot, 1);
+        assertPermanentCount(playerA, takklemaggot, 0);
+        assertLife(playerB, 20);
+    }
+
     @Test
     public void test_ReturnAsNonAura_CreatureCantBeEnchanted() {
         // When enchanted creature dies, that creature’s controller chooses a creature that Takklemaggot could enchant.

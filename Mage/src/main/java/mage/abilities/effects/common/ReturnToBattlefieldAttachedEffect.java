@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -31,10 +32,11 @@ public class ReturnToBattlefieldAttachedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Card aura = game.getCard(source.getSourceId());
+        // the delayed ability shares the tie of the dies trigger that created it
+        Card aura = DiesAttachedTriggeredAbility.getAttachmentCardInGraveyard(game, source);
         if (controller == null
                 || creature == null
-                || aura == null || game.getState().getZone(aura.getId()) != Zone.GRAVEYARD) {
+                || aura == null) {
             return false;
         }
 

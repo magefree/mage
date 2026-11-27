@@ -35,7 +35,13 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
+        // only the card the permanent became in the graveyard, not one that has moved on since
         Card card = permanent.getMainCard();
+        if (card == null
+                || game.getState().getZone(card.getId()) != Zone.GRAVEYARD
+                || card.getZoneChangeCounter(game) != permanent.getZoneChangeCounter(game) + 1) {
+            return false;
+        }
         return player.moveCards(card, Zone.HAND, source, game);
     }
 }

@@ -55,12 +55,15 @@ public class AsTurnedFaceUpEffect extends ReplacementEffectImpl {
                 return false;
             }
         }
+        // the static ability is one object for the whole game, so activating it would tie it to this face-up's
+        // object for good; each face-up acts through its own copy
+        Ability faceUpSource = source.copy();
         for (Effect effect : baseEffects) {
-            if (source.activate(game, false)) {
+            if (faceUpSource.activate(game, false)) {
                 if (effect instanceof ContinuousEffect) {
-                    game.addEffect((ContinuousEffect) effect, source);
+                    game.addEffect((ContinuousEffect) effect, faceUpSource);
                 } else {
-                    effect.apply(game, source);
+                    effect.apply(game, faceUpSource);
                 }
             }
         }

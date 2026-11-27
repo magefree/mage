@@ -77,7 +77,7 @@ class TheIrencragBecomesContinuousEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+        affectedObjectList.add(new MageObjectReference(source, game));
     }
 
     @Override

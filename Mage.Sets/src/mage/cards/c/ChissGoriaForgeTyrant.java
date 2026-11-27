@@ -208,7 +208,7 @@ class ChissGoriaForgeTyrantWatcher extends Watcher {
     static boolean checkRef(Ability source, Set<MageObjectReference> morSet, Game game) {
         ChissGoriaForgeTyrantWatcher watcher = game.getState().getWatcher(ChissGoriaForgeTyrantWatcher.class);
         return watcher != null
-                && watcher.morMap.getOrDefault(new MageObjectReference(source.getSourceObject(game), game), emptySet)
+                && watcher.morMap.getOrDefault(new MageObjectReference(source, game), emptySet)
                 .stream()
                 .noneMatch(morSet::contains);
     }

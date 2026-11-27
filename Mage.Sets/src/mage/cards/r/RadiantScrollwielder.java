@@ -183,6 +183,6 @@ class RadiantScrollwielderWatcher extends Watcher {
             return false;
         }
         MageObjectReference mor = watcher.morMap.getOrDefault(new MageObjectReference(card, game), null);
-        return mor != null && mor.refersTo(source.getSourceObject(game), game);
+        return new MageObjectReference(source, game).equals(mor);
     }
 }
