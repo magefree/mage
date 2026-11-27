@@ -24,6 +24,7 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.util.functions.CopyTokenFunction;
 
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -82,7 +83,14 @@ class PhantomSteedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source));
         if (exileZone == null || exileZone.isEmpty()) {
-            return false;
+            // CR 603.7a: the "sacrifice that token at end of combat" delayed trigger is created by the
+            // resolution whether or not a token was created. With none it triggers at end of combat and
+            // sacrifices nothing (CR 603.7c).
+            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(
+                    new ExileTargetEffect("Sacrifice that token at end of combat")
+                            .setTargetPointer(new FixedTargets(Collections.emptyList(), game))
+            ), source);
+            return true;
         }
         for (Card card : exileZone.getCards(game)) {
             Token token = CopyTokenFunction.createTokenCopy(card, game);
