@@ -52,6 +52,12 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
         }
     }
 
+    @Override
+    public void resetInitialized() {
+        clearInitialized();
+        this.zoneChangeCounter.clear();
+    }
+
     private void wrongTargetsUsage(Ability source) {
         if (this.targetIndex > 0 && source.getTargetAdjuster() == null && !(source instanceof StackAbility)) {
             // first target pointer is default, so must be ignored

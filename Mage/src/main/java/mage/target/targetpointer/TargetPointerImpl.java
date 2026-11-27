@@ -46,6 +46,16 @@ public abstract class TargetPointerImpl implements TargetPointer {
     }
 
     @Override
+    public void resetInitialized() {
+        // static ZCC pointers (FixedTarget, FixedTargets) keep what they hold;
+        // only pointers that read the source's targets at init opt in
+    }
+
+    protected void clearInitialized() {
+        this.initialized = false;
+    }
+
+    @Override
     public Player getControllerOfFirstTargetOrLKI(Game game, Ability source) {
         Player targetController = null;
         Permanent permanent = this.getFirstTargetPermanentOrLKI(game, source);
