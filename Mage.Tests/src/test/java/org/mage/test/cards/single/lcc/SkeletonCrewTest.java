@@ -2,7 +2,6 @@ package org.mage.test.cards.single.lcc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -33,7 +32,6 @@ public class SkeletonCrewTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: leaves graveyard triggers look back in time (CR 603.10a), so the returned permanent must not trigger its own ability, see #13415
     public void test_ReturnItself_NoTrigger() {
         // Whenever one or more creature cards leave your graveyard, create a 2/2 black Skeleton Pirate creature token.
         // {5}{B}: Return Skeleton Crew from your graveyard to the battlefield tapped.
