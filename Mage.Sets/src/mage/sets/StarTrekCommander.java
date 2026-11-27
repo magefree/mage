@@ -428,6 +428,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 571, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Beacon of Kahless", 279, Rarity.RARE, mage.cards.t.TheBeaconOfKahless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Beacon of Kahless", 64, Rarity.RARE, mage.cards.t.TheBeaconOfKahless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Best of Both Worlds", 83, Rarity.RARE, mage.cards.t.TheBestOfBothWorlds.class));
         cards.add(new SetCardInfo("The Borg Queen", 1, Rarity.MYTHIC, mage.cards.t.TheBorgQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Borg Queen", 5, Rarity.MYTHIC, mage.cards.t.TheBorgQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Immortal Sun", 347, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class, NON_FULL_USE_VARIOUS));

@@ -5,13 +5,18 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AssimilateContinuousEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.Card;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.*;
@@ -34,6 +39,8 @@ import java.util.*;
  */
 public class AssimilateTargetEffect extends OneShotEffect {
 
+    private static final String ASSIMILATED_WITH_KEY = "assimilatedWith";
+
     public AssimilateTargetEffect() {
         super(Outcome.PutCreatureInPlay);
     }
@@ -54,14 +61,81 @@ public class AssimilateTargetEffect extends OneShotEffect {
             return false;
         }
 
+        Set<Permanent> permanentsToAssimilate = new LinkedHashSet<>();
         Set<Card> cardsToMove = new LinkedHashSet<>();
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null) {
+                permanentsToAssimilate.add(permanent);
+                continue;
+            }
             Card card = game.getCard(targetId);
             if (card != null && game.getState().getZone(card.getId()) != Zone.BATTLEFIELD) {
                 cardsToMove.add(card);
             }
         }
-        return assimilateCards(controller, cardsToMove, source, game);
+
+        boolean applied = false;
+        if (!permanentsToAssimilate.isEmpty()) {
+            applied |= assimilatePermanents(controller, permanentsToAssimilate, source, game);
+        }
+        if (!cardsToMove.isEmpty()) {
+            applied |= assimilateCards(controller, cardsToMove, source, game);
+        }
+        return applied;
+    }
+
+    private static String getAssimilatedKey(Game game, Ability source) {
+        return CardUtil.getObjectZoneString(
+                ASSIMILATED_WITH_KEY,
+                source.getSourceId(),
+                game,
+                CardUtil.getActualSourceObjectZoneChangeCounter(game, source),
+                false
+        );
+    }
+
+    public static boolean assimilatePermanent(Player controller, Permanent permanent, Ability source, Game game) {
+        if (controller == null || permanent == null) {
+            return false;
+        }
+        return assimilatePermanents(controller, Collections.singleton(permanent), source, game);
+    }
+
+    public static boolean assimilatePermanents(Player controller, Set<Permanent> permanents, Ability source, Game game) {
+        if (controller == null || permanents.isEmpty()) {
+            return false;
+        }
+
+        List<Permanent> toAssimilate = new ArrayList<>();
+        for (Permanent permanent : permanents) {
+            if (permanent != null && game.getState().getZone(permanent.getId()) == Zone.BATTLEFIELD) {
+                toAssimilate.add(permanent);
+            }
+        }
+        if (toAssimilate.isEmpty()) {
+            return false;
+        }
+
+        for (Permanent permanent : toAssimilate) {
+            MageObjectReference mor = new MageObjectReference(permanent, game);
+            game.addEffect(
+                    new GainControlTargetEffect(Duration.Custom, true)
+                            .setTargetPointer(new FixedTarget(permanent, game)),
+                    source
+            );
+            game.addEffect(new AssimilateContinuousEffect(mor), source);
+            recordAssimilatedPermanent(game, source, mor);
+        }
+        game.processAction();
+
+        for (Permanent permanent : toAssimilate) {
+            Permanent current = game.getPermanent(permanent.getId());
+            if (current != null) {
+                current.addCounters(CounterType.P1P1.createInstance(), source, game);
+            }
+        }
+        return true;
     }
 
     public static boolean assimilateCard(Player controller, Card card, Ability source, Game game) {
@@ -87,7 +161,40 @@ public class AssimilateTargetEffect extends OneShotEffect {
             game.addEffect(new AssimilateContinuousEffect(new MageObjectReference(enterCard, game, 1)), source);
         }
 
-        return controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game, false, false, false, null);
+        boolean moved = controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game, false, false, false, null);
+        for (Card card : cardsToMove) {
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (permanent != null) {
+                recordAssimilatedPermanent(game, source, new MageObjectReference(permanent, game));
+            }
+        }
+        return moved;
+    }
+
+    public static Set<Permanent> getAssimilatedPermanents(Game game, Ability source) {
+        String key = getAssimilatedKey(game, source);
+        @SuppressWarnings("unchecked")
+        Set<MageObjectReference> refs = (Set<MageObjectReference>) game.getState().getValue(key);
+        if (refs == null || refs.isEmpty()) {
+            return Collections.emptySet();
+        }
+        Set<Permanent> result = new LinkedHashSet<>();
+        for (MageObjectReference mor : refs) {
+            Permanent permanent = mor.getPermanent(game);
+            if (permanent != null) {
+                result.add(permanent);
+            }
+        }
+        return result;
+    }
+
+    private static void recordAssimilatedPermanent(Game game, Ability source, MageObjectReference mor) {
+        String key = getAssimilatedKey(game, source);
+        @SuppressWarnings("unchecked")
+        Set<MageObjectReference> existing = (Set<MageObjectReference>) game.getState().getValue(key);
+        Set<MageObjectReference> updated = existing == null ? new LinkedHashSet<>() : new LinkedHashSet<>(existing);
+        updated.add(mor);
+        game.getState().setValue(key, updated);
     }
 
     @Override
@@ -95,9 +202,12 @@ public class AssimilateTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
+        boolean targetsPermanent = mode.getTargets().stream().anyMatch(TargetPermanent.class::isInstance);
         return "assimilate "
-                + getTargetPointer().describeTargets(mode.getTargets(), "that card")
-                + ". <i>(Put it onto the battlefield under your control with a +1/+1 counter. "
+                + getTargetPointer().describeTargets(mode.getTargets(), targetsPermanent ? "that creature" : "that card")
+                + (targetsPermanent
+                ? ". <i>(Gain control of it and put a +1/+1 counter on it. "
+                : ". <i>(Put it onto the battlefield under your control with a +1/+1 counter. ")
                 + "It's a Borg artifact creature and loses all other creature types.)</i>";
     }
 }
