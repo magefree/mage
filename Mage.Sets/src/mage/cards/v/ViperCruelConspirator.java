@@ -17,9 +17,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.AttackingAlonePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -71,21 +69,5 @@ public final class ViperCruelConspirator extends CardImpl {
     @Override
     public ViperCruelConspirator copy() {
         return new ViperCruelConspirator(this);
-    }
-}
-
-enum AttackingAlonePredicate implements Predicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.isAttacking()
-            && game.getCombat().attacksAlone()
-            && game.getCombat().getAttackers().contains(input.getId());
-    }
-
-    @Override
-    public String toString() {
-        return "Attacking alone";
     }
 }
