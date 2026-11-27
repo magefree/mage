@@ -33,6 +33,43 @@ public class RedemptorDreadnoughtTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testAttackNothingExiledDoesNotTrigger() {
+        // Intervening-if (CR 603.4): with no card exiled with it, the ability does not trigger at all.
+        addCard(Zone.BATTLEFIELD, playerA, redemptor, 1); // never cast, nothing exiled with it
+        addCard(Zone.GRAVEYARD, playerA, ghoul, 1);
+
+        attack(1, playerA, redemptor, playerB);
+        checkStackSize("no trigger when nothing is exiled with it", 1, PhaseStep.DECLARE_ATTACKERS, playerA, 0);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, ghoul, 1);
+        assertPowerToughness(playerA, redemptor, 4, 4);
+    }
+
+    @Test
+    public void testCastNoAdditionalCostThenAttackDoesNotTrigger() {
+        addCard(Zone.HAND, playerA, redemptor, 1);
+        addCard(Zone.GRAVEYARD, playerA, ghoul, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, redemptor);
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // choose not to exile anything
+
+        attack(3, playerA, redemptor, playerB);
+        checkStackSize("no trigger when nothing is exiled with it", 3, PhaseStep.DECLARE_ATTACKERS, playerA, 0);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, ghoul, 1);
+        assertPowerToughness(playerA, redemptor, 4, 4);
+    }
+
+    @Test
     public void testCastAdditionalCostAndTrigger() {
         addCard(Zone.HAND, playerA, redemptor, 1);
         addCard(Zone.GRAVEYARD, playerA, ghoul, 1);
@@ -42,6 +79,7 @@ public class RedemptorDreadnoughtTest extends CardTestPlayerBase {
         setChoice(playerA, ghoul); // exile Warpath Ghoul
 
         attack(3, playerA, redemptor, playerB);
+        checkStackSize("trigger when a card is exiled with it", 3, PhaseStep.DECLARE_ATTACKERS, playerA, 1);
 
         setStopAt(3, PhaseStep.END_TURN);
         setStrictChooseMode(true);

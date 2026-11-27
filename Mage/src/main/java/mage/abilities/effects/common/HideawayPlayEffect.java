@@ -32,7 +32,7 @@ public class HideawayPlayEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.playOne = playOne;
         if (playOne) {
-            staticText = "if there are cards exiled with it, you may play one of them without paying its mana cost";
+            staticText = "you may play one of them without paying its mana cost";
         } else {
             staticText = "you may play the exiled card without paying its mana cost";
         }
