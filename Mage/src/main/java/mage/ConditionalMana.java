@@ -63,7 +63,10 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
     }
 
     public void addCondition(Condition condition) {
-        this.conditions.add(condition);
+        // the same condition from another mana source is the same restriction, so no need to keep it twice
+        if (!this.conditions.contains(condition)) {
+            this.conditions.add(condition);
+        }
     }
 
     public void setComparisonScope(Filter.ComparisonScope scope) {
@@ -72,6 +75,29 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
 
     public List<Condition> getConditions() {
         return conditions;
+    }
+
+    /**
+     * The same restriction: the same conditions (in any order) with the same comparison scope
+     */
+    public boolean hasSameConditions(ConditionalMana mana) {
+        return this.conditions.size() == mana.conditions.size()
+                && this.conditions.containsAll(mana.conditions)
+                && (this.scope == mana.scope || this.conditions.size() == 1);
+    }
+
+    /**
+     * Checks that both manas can be added into one conditional mana (see add), so it can be spent only on
+     * something that meets the restrictions of both: the same restriction, or all conditions of both must be met.
+     * It's impossible for "any of conditions" mana with another restriction.
+     */
+    public boolean canJoinConditions(ConditionalMana mana) {
+        return hasSameConditions(mana)
+                || (this.isAllConditionsMustBeMet() && mana.isAllConditionsMustBeMet());
+    }
+
+    private boolean isAllConditionsMustBeMet() {
+        return scope == Filter.ComparisonScope.All || conditions.size() == 1;
     }
 
     public boolean apply(Ability ability, Game game, UUID manaProducerId, Cost costToPay) {
@@ -183,8 +209,13 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
     @Override
     public void add(Mana mana) {
         if (mana instanceof ConditionalMana) {
-            for (Condition condition : ((ConditionalMana) mana).getConditions()) {
-                addCondition(condition);
+            ConditionalMana conditionalMana = (ConditionalMana) mana;
+            if (!hasSameConditions(conditionalMana)) {
+                // different restrictions, so all conditions of both must be met (see canJoinConditions)
+                for (Condition condition : conditionalMana.getConditions()) {
+                    addCondition(condition);
+                }
+                scope = Filter.ComparisonScope.All;
             }
         }
         super.add(mana);
@@ -232,7 +263,12 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), conditions, staticText, scope, manaProducerId, manaProducerOriginalId);
+        // conditions in any order, see equals
+        int conditionsHash = 0;
+        for (Condition condition : conditions) {
+            conditionsHash += condition.hashCode();
+        }
+        return Objects.hash(super.hashCode(), conditionsHash, staticText, scope, manaProducerId, manaProducerOriginalId);
     }
 
     @Override
@@ -255,16 +291,6 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
         if (!Objects.equals(this.scope, that.scope)) {
             return false;
         }
-        if (this.conditions == null || that.conditions == null
-                || this.conditions.size() != that.conditions.size()) {
-            return false;
-        }
-        for (int i = 0; i < this.conditions.size(); i++) {
-            if (!(Objects.equals(this.conditions.get(i), that.conditions.get(i)))) {
-                return false;
-            }
-        }
-
-        return true;
+        return hasSameConditions(that);
     }
 }

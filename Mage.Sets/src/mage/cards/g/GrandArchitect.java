@@ -130,7 +130,7 @@ class GrandArchitectConditionalMana extends ConditionalMana {
     GrandArchitectConditionalMana() {
         super(Mana.ColorlessMana(2));
         staticText = "Spend this mana only to cast artifact spells or activate abilities of artifacts";
-        addCondition(new GrandArchitectManaCondition());
+        addCondition(GrandArchitectManaCondition.instance);
     }
 
     private GrandArchitectConditionalMana(final GrandArchitectConditionalMana conditionalMana) {
@@ -143,7 +143,8 @@ class GrandArchitectConditionalMana extends ConditionalMana {
     }
 }
 
-class GrandArchitectManaCondition implements Condition {
+enum GrandArchitectManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

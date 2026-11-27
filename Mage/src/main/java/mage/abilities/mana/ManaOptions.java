@@ -19,8 +19,10 @@ import java.util.*;
  * be used to find all the ways to pay a mana cost or all the different mana
  * combinations available to a player
  * <p>
- * TODO: Conditional Mana is not supported yet.
- *       The mana adding removes the condition of conditional mana
+ * Conditional mana keeps its conditions in the options: an option with conditional mana in it can be spent
+ * only on something that meets the conditions of all its parts, so the same option without that mana stays too.
+ * TODO: mana abilities with mana costs (subtractCostAddMana) don't support conditional mana yet,
+ *       the mana adding there removes the condition of conditional mana
  * <p>
  * A LinkedHashSet is used to get the performance benefits of automatic de-duplication of the Mana
  * to avoid performance issues related with manual de-duplication (see https://github.com/magefree/mage/issues/7710).
@@ -67,23 +69,8 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 for (Mana netMana : ability.getNetMana(game)) {
                     checkManaReplacementAndTriggeredMana(ability, game, netMana);
                     for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
-                        SkipAddMana:
                         for (Mana mana : copy) {
-                            Mana newMana = new Mana();
-                            newMana.add(mana);
-                            newMana.add(triggeredManaVariation);
-                            for (Mana existingMana : this) {
-                                if (existingMana.equalManaValue(newMana)) {
-                                    continue SkipAddMana;
-                                }
-                                Mana moreValuable = Mana.getMoreValuableMana(newMana, existingMana);
-                                if (moreValuable != null) {
-                                    // only keep the more valuable mana
-                                    existingMana.setToMana(moreValuable);
-                                    continue SkipAddMana;
-                                }
-                            }
-                            this.add(newMana);
+                            addOptionWithSourceMana(mana, triggeredManaVariation, true);
                         }
                     }
 
@@ -92,17 +79,87 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         }
     }
 
-    private void addManaVariation(List<Mana> netManas, ActivatedManaAbilityImpl ability, Game game) {
-        Mana newMana;
+    /**
+     * Adds a new option: an old option with the mana of a mana source on top.
+     * <p>
+     * Conditional mana keeps its conditions, so the whole new option can be spent only on something that meets
+     * them. That's why the old option stays as an option too (the same mana without that source).
+     * <p>
+     * Both params are only read: they are not changed and not stored, every added option is a new object.
+     *
+     * @param oldOption            option from the list before the mana source
+     * @param sourceMana           mana from the mana source
+     * @param keepMoreValuableOnly see addOption
+     */
+    private void addOptionWithSourceMana(Mana oldOption, Mana sourceMana, boolean keepMoreValuableOnly) {
+        if (canJoinConditions(oldOption, sourceMana)) {
+            addOption(joinMana(oldOption, sourceMana), keepMoreValuableOnly);
+        }
+        if (sourceMana instanceof ConditionalMana) {
+            addOption(oldOption.copy(), keepMoreValuableOnly);
+        }
+    }
 
+    /**
+     * @param newOption            must be a new object, it will be stored and can be changed later
+     * @param keepMoreValuableOnly true - compare with existing options with the same conditions: ignore the new option
+     *                             if an existing one covers it, improve an existing one if the new option covers it
+     */
+    private void addOption(Mana newOption, boolean keepMoreValuableOnly) {
+        if (keepMoreValuableOnly) {
+            for (Mana existingMana : this) {
+                if (existingMana.equalManaValue(newOption) && isSameConditions(existingMana, newOption)) {
+                    return;
+                }
+                Mana moreValuable = Mana.getMoreValuableMana(newOption, existingMana);
+                if (moreValuable != null) {
+                    // only keep the more valuable mana
+                    existingMana.setToMana(moreValuable);
+                    return;
+                }
+            }
+        }
+        this.add(newOption);
+    }
+
+    /**
+     * Sum of two manas as a new object. Conditional mana keeps its conditions: the result is conditional mana
+     * with the conditions of both params.
+     */
+    private static Mana joinMana(Mana oldOption, Mana sourceMana) {
+        // conditional mana must go first, otherwise the sum will be normal mana without conditions
+        Mana first = (sourceMana instanceof ConditionalMana) ? sourceMana : oldOption;
+        Mana second = (first == sourceMana) ? oldOption : sourceMana;
+        Mana newMana = first.copy();
+        newMana.add(second);
+        return newMana;
+    }
+
+    /**
+     * Normal mana can be joined with anything. Two conditional manas only if their conditions can be written
+     * as one list.
+     */
+    private static boolean canJoinConditions(Mana mana1, Mana mana2) {
+        if (mana1 instanceof ConditionalMana && mana2 instanceof ConditionalMana) {
+            return ((ConditionalMana) mana1).canJoinConditions((ConditionalMana) mana2);
+        }
+        return true;
+    }
+
+    private static boolean isSameConditions(Mana mana1, Mana mana2) {
+        if (mana1 instanceof ConditionalMana && mana2 instanceof ConditionalMana) {
+            return ((ConditionalMana) mana1).hasSameConditions((ConditionalMana) mana2);
+        }
+        return !(mana1 instanceof ConditionalMana) && !(mana2 instanceof ConditionalMana);
+    }
+
+    private void addManaVariation(List<Mana> netManas, ActivatedManaAbilityImpl ability, Game game) {
         List<Mana> copy = new ArrayList<>(this);
         this.clear();
         for (Mana netMana : netManas) {
             for (Mana mana : copy) {
                 if (!ability.hasTapCost() || checkManaReplacementAndTriggeredMana(ability, game, netMana)) {
-                    newMana = mana.copy();
-                    newMana.add(netMana);
-                    this.add(newMana);
+                    addOptionWithSourceMana(mana, netMana, false);
                 }
             }
         }
@@ -171,9 +228,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                                 checkManaReplacementAndTriggeredMana(ability, game, netMana);
                                 for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                     for (Mana mana : copy) {
-                                        Mana newMana = mana.copy();
-                                        newMana.add(triggeredManaVariation);
-                                        this.add(newMana);
+                                        addOptionWithSourceMana(mana, triggeredManaVariation, false);
                                         wasUsable = true;
                                     }
                                 }
@@ -213,9 +268,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                             checkManaReplacementAndTriggeredMana(ability, game, netMana);
                             for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                 for (Mana mana : copy) {
-                                    Mana newMana = mana.copy();
-                                    newMana.add(triggeredManaVariation);
-                                    this.add(newMana);
+                                    addOptionWithSourceMana(mana, triggeredManaVariation, false);
                                     wasUsable = true;
                                 }
                             }
@@ -292,8 +345,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 baseManaPlusTriggeredMana.clear();
                 for (Mana triggeredMana : availableTriggeredMana) {
                     for (Mana prevMana : copy) {
-                        Mana newMana = new Mana();
-                        newMana.add(prevMana);
+                        Mana newMana = prevMana.copy(); // copy to keep conditions of conditional mana
                         newMana.add(triggeredMana);
                         baseManaPlusTriggeredMana.add(newMana);
                     }
@@ -336,10 +388,8 @@ public class ManaOptions extends LinkedHashSet<Mana> {
             List<Mana> copy = new ArrayList<>(this);
             this.clear();
             for (Mana mana : copy) {
-                ConditionalMana condMana = ((ConditionalMana) addMana).copy();
-                condMana.add(mana);
-                add(condMana); // Add mana as option with condition
-                add(mana); // Add old mana without the condition
+                // mana as option with condition + old mana without the condition
+                addOptionWithSourceMana(mana, addMana, false);
             }
 
         } else {

@@ -1,6 +1,5 @@
 package mage;
 
-import mage.abilities.condition.Condition;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
@@ -1358,12 +1357,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return null;
         }
 
-        if (mana1IsConditional) {
-            List<Condition> conditions1 = ((ConditionalMana) mana1).getConditions();
-            List<Condition> conditions2 = ((ConditionalMana) mana2).getConditions();
-            if (!Objects.equals(conditions1, conditions2)) {
-                return null;
-            }
+        if (mana1IsConditional && !((ConditionalMana) mana1).hasSameConditions((ConditionalMana) mana2)) {
+            return null;
         }
 
         // Set one mana as moreMana and one as lessMana.

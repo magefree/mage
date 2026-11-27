@@ -74,11 +74,12 @@ class PrimalBeyondConditionalMana extends ConditionalMana {
     public PrimalBeyondConditionalMana(Mana mana) {
         super(mana);
         this.staticText = "Spend this mana only to cast an Elemental spell or activate an ability of an Elemental";
-        addCondition(new PrimalBeyondManaCondition());
+        addCondition(PrimalBeyondManaCondition.instance);
     }
 }
 
-class PrimalBeyondManaCondition implements Condition {
+enum PrimalBeyondManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

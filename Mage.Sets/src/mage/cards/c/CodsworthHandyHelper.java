@@ -98,7 +98,7 @@ class CodsworthHandyHelperConditionalMana extends ConditionalMana {
 
     public CodsworthHandyHelperConditionalMana(Mana mana) {
         super(mana);
-        addCondition(new CodsworthHandyHelperManaCondition());
+        addCondition(CodsworthHandyHelperManaCondition.instance);
     }
 
     private CodsworthHandyHelperConditionalMana(final CodsworthHandyHelperConditionalMana conditionalMana) {
@@ -111,7 +111,8 @@ class CodsworthHandyHelperConditionalMana extends ConditionalMana {
     }
 }
 
-class CodsworthHandyHelperManaCondition implements Condition {
+enum CodsworthHandyHelperManaCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

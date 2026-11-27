@@ -99,4 +99,13 @@ class SpellCastManaCondition extends ManaCondition implements Condition {
         return apply(game, source);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj) && Objects.equals(this.filter, ((SpellCastManaCondition) obj).filter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), filter);
+    }
 }
