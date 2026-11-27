@@ -402,7 +402,6 @@ public class AssimilateTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: enable after engine-level cleanup of enterWithCounters when battlefield entry is prevented
     public void test_PreventedFromEntering_LaterCastGetsNoCounter() {
         // When Borg Queen enters, assimilate target creature card from an opponent's graveyard.
         addCard(Zone.HAND, playerA, "Borg Queen, Perfection Manifest"); // {4}{B}{B}
