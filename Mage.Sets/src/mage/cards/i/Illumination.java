@@ -69,25 +69,17 @@ class IlluminationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID targetId = source.getFirstTarget();
-        Player controller = null;
-        boolean countered = false;
-        if (targetId != null) {
-            controller = game.getPlayer(game.getControllerId(targetId));
+        // CounterTargetEffect already countered the spell, so it is no longer on the stack.
+        // CR 608.2h: use its last known information for the mana value and the controller.
+        Spell spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
+        if (spell == null) {
+            return false;
         }
-        if (targetId != null
-                && game.getStack().counter(targetId, source, game)) {
-            countered = true;
+        Player player = game.getPlayer(spell.getControllerId());
+        if (player == null) {
+            return false;
         }
-        if (controller != null) {
-            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-            int cost = spell.getManaValue();
-            Player player = game.getPlayer(spell.getControllerId());
-            if (player != null) {
-                player.gainLife(cost, game, source);
-            }
-            return true;
-        }
-        return countered;
+        player.gainLife(spell.getManaValue(), game, source);
+        return true;
     }
 }
