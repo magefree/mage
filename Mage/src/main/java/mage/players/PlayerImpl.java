@@ -1788,6 +1788,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.getStack().push(game, new StackAbility(ability, playerId));
             }
             if (ability.activate(game, false)) {
+                // 603.3c/700.2b: a modal triggered ability whose mode choice
+                // selects no mode is removed from the stack. Without this the
+                // ability stays there and resolves as a no-op (Bumi, King of
+                // Three Trials with no Lesson card in the graveyard).
+                if (ability.isUsesStack() && ability.isModal()
+                        && ability.getModes().getSelectedModes().isEmpty()) {
+                    restoreState(bookmark, triggeredAbility.getRule(), game);
+                    return false;
+                }
                 if ((ability.isUsesStack()
                         || ability.getRuleVisible())
                         && !game.isSimulation()) {
