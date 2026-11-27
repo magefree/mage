@@ -51,6 +51,9 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Crypt", 394, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Crypt", 489, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Boarding Action", 139, Rarity.COMMON, mage.cards.b.BoardingAction.class));
+        cards.add(new SetCardInfo("Borg Cube", 227, Rarity.MYTHIC, mage.cards.b.BorgCube.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Borg Cube", 475, Rarity.MYTHIC, mage.cards.b.BorgCube.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Borg Cube", 555, Rarity.MYTHIC, mage.cards.b.BorgCube.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 279, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 401, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Breeding Pool", 496, Rarity.RARE, mage.cards.b.BreedingPool.class, NON_FULL_USE_VARIOUS));
