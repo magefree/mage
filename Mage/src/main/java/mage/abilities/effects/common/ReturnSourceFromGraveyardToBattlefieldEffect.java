@@ -79,7 +79,8 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         if (player == null) {
             return false;
         }
-        if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
+        if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
+                && source.getSourceObjectIfItStillExists(game) != null) { // CR 400.7: not a new object
             player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
             if (haste) {
                 Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
