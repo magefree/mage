@@ -40,7 +40,7 @@ public class CombatDamageStep extends Step {
     @Override
     public boolean skipStep(Game game, UUID activePlayerId) {
         // 508.8
-        if (game.getCombat().noAttackers()) {
+        if (game.getCombat().noAttackersDeclared()) {
             return true;
         }
         // 510.4

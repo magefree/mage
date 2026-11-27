@@ -74,6 +74,10 @@ public class Combat implements Serializable, Copyable<Combat> {
     private int maxAttackers = Integer.MIN_VALUE;
 
     private final HashSet<UUID> attackersTappedByAttack = new HashSet<>();
+    // CR 508.8: whether any creature was declared as an attacker or put onto the
+    // battlefield attacking this combat. A creature that later leaves combat does
+    // not clear it; only the next combat's clear() does.
+    private boolean attackersDeclared = false;
 
     public Combat() {
         this.useToughnessForDamage = false;
@@ -104,6 +108,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         this.maxAttackers = combat.maxAttackers;
         this.attackersTappedByAttack.addAll(combat.attackersTappedByAttack);
+        this.attackersDeclared = combat.attackersDeclared;
     }
 
     public List<CombatGroup> getGroups() {
@@ -194,6 +199,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         creaturesForcedToAttack.clear();
         maxAttackers = Integer.MIN_VALUE;
         attackersTappedByAttack.clear();
+        attackersDeclared = false;
     }
 
     public String getValue() {
@@ -1598,6 +1604,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         newGroup.attackers.add(attackerId);
         attacker.setAttacking(new MageObjectReference(defenderId, game));
         groups.add(newGroup);
+        attackersDeclared = true;
         return true;
     }
 
@@ -1794,6 +1801,15 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public boolean noAttackers() {
         return groups.isEmpty() || getAttackers().isEmpty();
+    }
+
+    /**
+     * CR 508.8: no creature was declared as an attacker or put onto the battlefield
+     * attacking this combat. Unlike {@link #noAttackers()}, a declared attacker that
+     * later left combat (sacrificed, destroyed, removed) does not make this true.
+     */
+    public boolean noAttackersDeclared() {
+        return !attackersDeclared;
     }
 
     public boolean isPlaneswalkerAttacked(UUID defenderId, Game game) {
