@@ -188,7 +188,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                             for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                 for (Mana startingMana : copy) {
                                     if (startingMana.includesMana(manaCosts)) { // can pay the mana costs to use the ability
-                                        if (!subtractCostAddMana(manaCosts, triggeredManaVariation, ability.getCosts().isEmpty(), startingMana, ability, game)) {
+                                        if (!subtractCostAddMana(manaCosts, triggeredManaVariation, ability.getCosts().isEmpty(), startingMana, ability, game, Collections.emptyList())) {
                                             // the starting mana includes mana parts that the increased mana does not include, so add starting mana also as an option
                                             add(startingMana);
                                         }
@@ -228,7 +228,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                                     for (Mana manaOption : ability.getManaCosts().getManaOptions()) {
                                         if (previousMana.includesMana(manaOption)) { // costs can be paid
                                             // subtractCostAddMana has side effects on {this}. Do not add wasUsable to the if-statement above
-                                            wasUsable |= subtractCostAddMana(manaOption, triggeredManaVariation, ability.getCosts().isEmpty(), previousMana, ability, game);
+                                            wasUsable |= subtractCostAddMana(manaOption, triggeredManaVariation, ability.getCosts().isEmpty(), previousMana, ability, game, Collections.emptyList());
                                         }
                                     }
                                 }
@@ -249,6 +249,10 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     }
 
     public boolean addManaPoolDependant(List<ActivatedManaAbilityImpl> abilities, Game game) {
+        return addManaPoolDependant(abilities, game, Collections.emptyList());
+    }
+
+    public boolean addManaPoolDependant(List<ActivatedManaAbilityImpl> abilities, Game game, List<ConditionalMana> reservedMana) {
         if (abilities.isEmpty() || abilities.size() != 1) {
             return false;
         }
@@ -263,7 +267,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         for (Mana previousMana : copy) {
             if (previousMana.includesMana(manaCosts)) { // can pay the mana costs to use the ability
                 for (Mana manaOption : ability.getManaCosts().getManaOptions()) {
-                    if (!subtractCostAddMana(manaOption, null, ability.getCosts().isEmpty(), previousMana, ability, game)) {
+                    if (!subtractCostAddMana(manaOption, null, ability.getCosts().isEmpty(), previousMana, ability, game, reservedMana)) {
                         // the starting mana includes mana parts that the increased mana does not include, so add starting mana also as an option
                         add(previousMana);
                     }
@@ -387,7 +391,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
      *                      ability
      * @return true if the new complete mana does replace the current mana completely
      */
-    private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, final Mana startingMana, ManaAbility manaAbility, Game game) {
+    private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, final Mana startingMana, ManaAbility manaAbility, Game game, List<ConditionalMana> reservedMana) {
         boolean oldManaWasReplaced = false; // True if the newly created mana includes all mana possibilities of the old
         boolean repeatable = manaToAdd != null  // TODO: re-write "only replace to any with mana costs only will be repeated if able"
                 && onlyManaCosts
@@ -421,7 +425,15 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 }
 
                 // find resulting mana (it can have multiple options)
-                List<Mana> addingManaOptions = (manaToAdd != null) ? Collections.singletonList(manaToAdd) : manaAbility.getNetMana(game, possibleMana);
+                List<Mana> addingManaOptions;
+                if (manaToAdd != null) {
+                    addingManaOptions = Collections.singletonList(manaToAdd);
+                } else {
+                    // Doubling Cube counts all unspent mana, including mana that can't pay its activation cost.
+                    Mana remainingPool = possibleMana.copy();
+                    reservedMana.forEach(remainingPool::add);
+                    addingManaOptions = manaAbility.getNetMana(game, remainingPool);
+                }
                 for (Mana addingMana : addingManaOptions) {
                     // TODO: is it bugged on addingManaOptions.size() > 1 (adding multiple times)?
                     possibleMana.add(addingMana);
