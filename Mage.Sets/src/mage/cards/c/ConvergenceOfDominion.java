@@ -8,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.common.ControlYourCommanderHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -26,7 +27,9 @@ public final class ConvergenceOfDominion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Dynastic Command Node -- As long as you control your commander, activated abilities of cards in your graveyard cost {2} less to activate. This effect can't reduce the mana in that ability's activation cost to less than one mana.
-        this.addAbility(new SimpleStaticAbility(new ConvergenceOfDominionEffect()).withFlavorWord("Dynastic Command Node"));
+        this.addAbility(new SimpleStaticAbility(new ConvergenceOfDominionEffect())
+                .withFlavorWord("Dynastic Command Node")
+                .addHint(ControlYourCommanderHint.instance));
 
         // Translocation Protocols -- {3}, {T}: Mill three cards.
         Ability ability = new SimpleActivatedAbility(new MillCardsControllerEffect(3), new GenericManaCost(3));
