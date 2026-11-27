@@ -1870,6 +1870,9 @@ public abstract class GameImpl implements Game {
                                         return;
                                     }
                                     getState().handleSimultaneousEvent(this); // needed here to handle triggers e.g. from paying costs like sacrificing a creatures before LKIShort is cleared
+                                    // the short living LKI only serves the triggers of the action just taken; a player holding priority
+                                    // and acting again must not let permanents that left earlier look back at the next event (CR 603.10a)
+                                    resetShortLivingLKI();
                                     applyEffects();
                                 }
                                 if (isPaused()) {
