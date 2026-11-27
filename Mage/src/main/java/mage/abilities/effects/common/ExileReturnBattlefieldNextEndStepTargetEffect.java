@@ -75,10 +75,11 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
-        if (toExile.isEmpty()) {
-            return false;
+        // The delayed return trigger is created even when nothing was exiled
+        // (the target is "up to one"); it then resolves doing nothing.
+        if (!toExile.isEmpty()) {
+            controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         }
-        controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         Effect effect = yourControl
                 ? new ReturnToBattlefieldUnderYourControlTargetEffect(exiledOnly, tapped)
                 : new ReturnToBattlefieldUnderOwnerControlTargetEffect(tapped, exiledOnly);
