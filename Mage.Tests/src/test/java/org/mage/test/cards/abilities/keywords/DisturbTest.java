@@ -401,4 +401,165 @@ public class DisturbTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
     }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/14312
+     * Disturb back-face replacement effect must not apply while the card is in hidden zones.
+     */
+    @Test
+    public void test_SurveilIntoGraveyard() {
+        skipInitShuffling();
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Lunarch Veteran", 5);
+        addCard(Zone.HAND, playerA, "Consider"); // {U}, surveil 1, then draw
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Consider");
+        addTarget(playerA, "Lunarch Veteran"); // surveil to graveyard
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Lunarch Veteran", 1);
+        assertExileCount(playerA, "Lunarch Veteran", 0);
+    }
+
+    @Test
+    public void test_MillAndDiscardIntoGraveyard() {
+        skipInitShuffling();
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, "Lunarch Veteran", 5);
+        addCard(Zone.HAND, playerA, "Baithook Angler");
+        addCard(Zone.HAND, playerA, "Tome Scour"); // {U} target player mills 5
+        addCard(Zone.HAND, playerA, "Distress"); // {B}{B} target player discards chosen nonland card
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tome Scour", playerA);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Distress", playerA);
+        setChoice(playerA, "Baithook Angler");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Lunarch Veteran", 5);
+        assertExileCount(playerA, "Lunarch Veteran", 0);
+        assertGraveyardCount(playerA, "Baithook Angler", 1);
+        assertExileCount(playerA, "Baithook Angler", 0);
+    }
+
+    @Test
+    public void test_FrontSideCounteredAndDies() {
+        addCard(Zone.HAND, playerA, "Lunarch Veteran", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Counterspell");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+
+        // First copy cast normally and countered -> goes to graveyard
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lunarch Veteran");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Lunarch Veteran", "Lunarch Veteran");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        checkGraveyardCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lunarch Veteran", 1);
+        checkExileCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lunarch Veteran", 0);
+
+        // Second copy cast normally, resolves, then dies -> goes to graveyard
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lunarch Veteran");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Lunarch Veteran");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Lunarch Veteran", 2);
+        assertExileCount(playerA, "Lunarch Veteran", 0);
+    }
+
+    @Test
+    public void test_TransformedOnBattlefieldDies() {
+        addCard(Zone.HAND, playerA, "Lunarch Veteran");
+        addCard(Zone.HAND, playerA, "Moonmist");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lunarch Veteran");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonmist");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Luminous Phantom");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Lunarch Veteran", 0);
+        assertExileCount(playerA, "Lunarch Veteran", 1);
+    }
+
+    @Test
+    public void test_ExiledBackFaceReturnedToGraveyard() {
+        addCard(Zone.GRAVEYARD, playerA, "Baithook Angler");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.HAND, playerA, "Pull from Eternity");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Hook-Haunt Drifter");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // Same step/turn: Pull from Eternity moves the exiled card back to graveyard without stale LKI re-exiling it
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pull from Eternity", "Baithook Angler");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerA, "Baithook Angler", 0);
+        assertGraveyardCount(playerA, "Baithook Angler", 1);
+    }
+
+    @Test
+    public void test_SameStepBackFaceCounteredThenFrontFaceCountered() {
+        addCard(Zone.GRAVEYARD, playerA, "Baithook Angler");
+        addCard(Zone.HAND, playerA, "Pull from Eternity");
+        addCard(Zone.HAND, playerA, "Raise Dead");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.HAND, playerB, "Counterspell", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Hook-Haunt Drifter", "Hook-Haunt Drifter");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkExileCount("after disturb countered", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baithook Angler", 1);
+
+        // Return to graveyard -> hand -> cast front face -> countered in same step
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pull from Eternity", "Baithook Angler");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raise Dead", "Baithook Angler");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baithook Angler");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Baithook Angler", "Baithook Angler");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerA, "Baithook Angler", 0);
+        assertGraveyardCount(playerA, "Baithook Angler", 1);
+    }
 }
