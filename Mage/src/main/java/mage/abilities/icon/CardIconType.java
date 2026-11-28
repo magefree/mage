@@ -34,6 +34,7 @@ public enum CardIconType {
     //
     OTHER_FACEDOWN("prepared/reply-fill.svg", CardIconCategory.ABILITY, 100),
     OTHER_COST_X("prepared/square-fill.svg", CardIconCategory.ABILITY, 100),
+    OTHER_COST_TO_PAY("prepared/khanda.svg", CardIconCategory.ABILITY, 100),
     OTHER_HAS_RESTRICTIONS("prepared/exclamation-triangle-fill.svg", CardIconCategory.ABILITY, 100),
     OTHER_HAS_TARGETS("prepared/square-fill.svg", CardIconCategory.COMMANDER, 100),
     //

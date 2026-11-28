@@ -8,6 +8,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -581,6 +582,16 @@ public class CardView extends SimpleCardView {
         if (card instanceof Spell) {
             this.mageObjectType = MageObjectType.SPELL;
             Spell spell = (Spell) card;
+
+            // real cost to pay instead printed cost, e.g. commander tax or cost reduction
+            // (face down spells must keep hidden cost, split spells show both halves instead)
+            if (showFaceUp && !this.isSplitCard && !spell.getSpellAbility().getManaCostsToPay().isEmpty()) {
+                this.manaCostLeftStr = new ArrayList<>();
+                for (ManaCost cost : spell.getSpellAbility().getManaCostsToPay()) {
+                    this.manaCostLeftStr.add(cost.getText());
+                }
+            }
+
             for (SpellAbility spellAbility : spell.getSpellAbilities()) {
                 for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                     Mode mode = spellAbility.getModes().get(modeId);

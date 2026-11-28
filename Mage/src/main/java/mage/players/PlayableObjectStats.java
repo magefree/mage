@@ -26,18 +26,26 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
     List<PlayableObjectRecord> basicCastAbilities = new ArrayList<>();
     List<PlayableObjectRecord> other = new ArrayList<>();
 
+    // real costs to pay instead printed costs, one per way to cast or play that object
+    List<String> costsToPay = new ArrayList<>();
+
     public PlayableObjectStats() {
     }
 
-    public PlayableObjectStats(List<ActivatedAbility> activatedAbilities) {
-        load(activatedAbilities);
+    public PlayableObjectStats(List<ActivatedAbility> activatedAbilities, List<String> costsToPay) {
+        load(activatedAbilities, costsToPay);
     }
 
-    public void load(List<ActivatedAbility> activatedAbilities) {
+    /**
+     * @param costsToPay real costs to pay instead printed costs, see PlayableObjectsList
+     */
+    public void load(List<ActivatedAbility> activatedAbilities, List<String> costsToPay) {
         this.basicManaAbilities.clear();
         this.basicPlayAbilities.clear();
         this.basicCastAbilities.clear();
         this.other.clear();
+        this.costsToPay.clear();
+        this.costsToPay.addAll(costsToPay);
 
         // split abilities to types (it allows to enable or disable playable icon)
         for (ActivatedAbility ability : activatedAbilities) {
@@ -77,6 +85,7 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
         for (PlayableObjectRecord rec : source.other) {
             this.other.add(rec.copy());
         }
+        this.costsToPay.addAll(source.costsToPay);
     }
 
     @Override
@@ -107,6 +116,11 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
         all.addAll(this.basicCastAbilities.stream().map(PlayableObjectRecord::getId).collect(Collectors.toList()));
         all.addAll(this.other.stream().map(PlayableObjectRecord::getId).collect(Collectors.toList()));
         return all;
+    }
+
+    public List<String> getPlayableCostsToPay() {
+        // real costs to pay for all ways to cast or play that object, playable or not
+        return new ArrayList<>(this.costsToPay);
     }
 
     public int getPlayableImportantAmount() {

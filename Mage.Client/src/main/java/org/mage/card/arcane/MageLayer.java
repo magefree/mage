@@ -3,6 +3,7 @@ package org.mage.card.arcane;
 import mage.abilities.icon.CardIcon;
 import mage.abilities.icon.CardIconCategory;
 import mage.abilities.icon.CardIconRenderSettings;
+import mage.abilities.icon.system.CostToPayIcon;
 import mage.abilities.icon.system.PlayableCountIcon;
 import mage.cards.MageCard;
 import mage.cards.MageCardAnimationSettings;
@@ -324,6 +325,17 @@ public class MageLayer extends MageCard {
         mainPanel.update(card);
     }
 
+    private static boolean hasOtherCostToPay(CardView card) {
+        // playable ability with a cost to pay different from the cost shown on the card
+        String shownCost = card.getManaCostStr();
+        for (String costToPay : card.getPlayableStats().getPlayableCostsToPay()) {
+            if (!costToPay.equals(shownCost)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void updateCardIcons(CardView card) {
         Map<CardIconsPanel, List<CardIcon>> newIcons = new HashMap<>();
         this.iconsPanels.forEach(panel -> newIcons.put(panel, new ArrayList<>()));
@@ -334,6 +346,10 @@ public class MageLayer extends MageCard {
         // playable icons
         if (card.getPlayableStats().getPlayableImportantAmount() > 0) {
             allIcons.add(new PlayableCountIcon(card.getPlayableStats()));
+        }
+        // real cost icons (only if it differs from the shown cost, split cards show both halves instead)
+        if (!card.isSplitCard() && hasOtherCostToPay(card)) {
+            allIcons.add(new CostToPayIcon(card.getPlayableStats()));
         }
 
         // create panels
