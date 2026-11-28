@@ -38,6 +38,14 @@ public interface CardImageSource {
 
     boolean isTokenSource();
 
+    /**
+     * File extension of the downloaded images, must match the real image data
+     * (images are saved as is, without any transcode)
+     */
+    default String getImageExtension() {
+        return ".jpg";
+    }
+
     default boolean isLanguagesSupport() {
         return false;
     }
