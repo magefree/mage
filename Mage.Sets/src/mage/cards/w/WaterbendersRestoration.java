@@ -1,6 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
@@ -25,7 +26,7 @@ public final class WaterbendersRestoration extends CardImpl {
         this.subtype.add(SubType.LESSON);
 
         // As an additional cost to cast this spell, waterbend {X}.
-        this.getSpellAbility().addCost(new WaterbendXCost());
+        this.getSpellAbility().addCost(new WaterbendXCost(VariableCostType.ADDITIONAL));
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("as an additional cost to cast this spell, waterbend {X}")
         ).setRuleAtTheTop(true));

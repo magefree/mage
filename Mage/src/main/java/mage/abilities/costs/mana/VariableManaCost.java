@@ -30,6 +30,7 @@ public class VariableManaCost extends ManaCostImpl implements MinMaxVariableCost
     protected FilterMana filter; // mana filter that can be used for that cost
     protected int minX = 0;
     protected int maxX = Integer.MAX_VALUE;
+    protected int reducedBy = 0; // generic reduction carried into {X} before X is announced (e.g. "mana cost reduced by {4}")
 
     public VariableManaCost(VariableCostType costType) {
         this(costType, 1);
@@ -54,6 +55,7 @@ public class VariableManaCost extends ManaCostImpl implements MinMaxVariableCost
         }
         this.minX = manaCost.minX;
         this.maxX = manaCost.maxX;
+        this.reducedBy = manaCost.reducedBy;
     }
 
     @Override
@@ -67,7 +69,8 @@ public class VariableManaCost extends ManaCostImpl implements MinMaxVariableCost
 
         // limit mana options for better performance
         CardUtil.distributeValues(10, getMinX(), getMaxX()).forEach(value -> {
-            res.add(Mana.GenericMana(value));
+            long total = (long) value * xInstancesCount - reducedBy;
+            res.add(Mana.GenericMana((int) Math.max(0L, Math.min(Integer.MAX_VALUE, total))));
         });
 
         return res;
@@ -138,6 +141,16 @@ public class VariableManaCost extends ManaCostImpl implements MinMaxVariableCost
 
     public int getXInstancesCount() {
         return this.xInstancesCount;
+    }
+
+    public int getReducedBy() {
+        return this.reducedBy;
+    }
+
+    public void addReducedBy(int amount) {
+        if (amount > 0) {
+            this.reducedBy += amount;
+        }
     }
 
     @Override

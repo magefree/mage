@@ -841,7 +841,7 @@ public abstract class AbilityImpl implements Ability {
                         "Announce the value for " + variableManaCost.getText(), game, this, true);
             }
 
-            int amountMana = xValue * variableManaCost.getXInstancesCount();
+            int amountMana = Math.max(0, xValue * variableManaCost.getXInstancesCount() - variableManaCost.getReducedBy());
             StringBuilder manaString = threadLocalBuilder.get();
             if (!(variableManaCost instanceof WaterbendXCost)) {
                 if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {

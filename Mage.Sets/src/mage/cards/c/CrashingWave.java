@@ -2,6 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
@@ -33,7 +34,7 @@ public final class CrashingWave extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");
 
         // As an additional cost to cast this spell, waterbend {X}.
-        this.getSpellAbility().addCost(new WaterbendXCost());
+        this.getSpellAbility().addCost(new WaterbendXCost(VariableCostType.ADDITIONAL));
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("as an additional cost to cast this spell, waterbend {X}")
         ).setRuleAtTheTop(true));
