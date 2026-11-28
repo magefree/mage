@@ -510,6 +510,7 @@ public abstract class AbilityImpl implements Ability {
                 case HARMONIZE:
                 case BEAM_ME_UP:
                 case MADNESS:
+                case MIRACLE:
                 case TRANSFORMED:
                 case DISTURB:
                 case MORE_THAN_MEETS_THE_EYE:

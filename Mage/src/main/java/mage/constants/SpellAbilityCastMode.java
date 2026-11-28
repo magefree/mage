@@ -14,6 +14,7 @@ import mage.game.stack.Spell;
 public enum SpellAbilityCastMode {
     NORMAL("Normal"),
     MADNESS("Madness"),
+    MIRACLE("Miracle"),
     FLASHBACK("Flashback"),
     HARMONIZE("Harmonize"),
     BEAM_ME_UP("Beam me up"),
@@ -93,6 +94,7 @@ public enum SpellAbilityCastMode {
                 break;
             case NORMAL:
             case MADNESS:
+            case MIRACLE:
             case FLASHBACK:
             case HARMONIZE:
             case BEAM_ME_UP:
