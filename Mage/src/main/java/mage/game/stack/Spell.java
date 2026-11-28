@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.MageObjectAttribute;
 import mage.game.events.CopiedStackObjectEvent;
+import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -99,7 +100,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability.setControllerId(controllerId);
 
         // 712.8c TDFC spell "Its mana value is calculated using the mana cost of its front face"
-        if(ability instanceof SpellTransformedAbility && manaCost.isEmpty()) {
+        if (ability instanceof SpellTransformedAbility && manaCost.isEmpty()) {
             this.manaCost = card.getMainCard().getManaCost().copy();
             this.ability.setSourceId(affectedCard.getId()); // Maybe wrong? Permanent has incorrect id otherwise
         }
@@ -325,6 +326,9 @@ public class Spell extends StackObjectImpl implements Card {
                     } else {
                         controller.moveCards(card, Zone.GRAVEYARD, ability, game);
                     }
+                }
+                if (result) {
+                    game.fireEvent(new GameEvent(GameEvent.EventType.RESOLVING_ABILITY, this.getId(), this.getSpellAbility(), this.getControllerId()));
                 }
                 return result;
             }
