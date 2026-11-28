@@ -23,9 +23,23 @@ public class TargetsCountAdjuster extends GenericTargetAdjuster {
         this.dynamicValue = value;
     }
 
+    /**
+     * True when the adjusted number of targets is zero ("X target ..." with X = 0), so the
+     * ability needs no target at all. X is announced before targets are chosen (CR 601.2b,
+     * 601.2c), and until then an {X} value reads 0: a playability check made before the
+     * adjustment therefore must not require a candidate for the blueprint target.
+     */
+    public boolean needsNoTargets(Ability ability, Game game) {
+        return targetCount(ability, game) <= 0;
+    }
+
+    private int targetCount(Ability ability, Game game) {
+        return dynamicValue.calculate(game, ability, ability.getEffects().get(0));
+    }
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int count = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
+        int count = targetCount(ability, game);
         ability.getTargets().clear();
         if (count <= 0) {
             return;
