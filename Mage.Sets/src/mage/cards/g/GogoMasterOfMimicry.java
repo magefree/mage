@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -15,7 +14,6 @@ import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetActivatedOrTriggeredAbility;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -43,7 +41,7 @@ public final class GogoMasterOfMimicry extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new GogoMasterOfMimicryCopyEffect(), new ManaCostsImpl<>("{X}{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
-        CardUtil.castStream(ability.getCosts(), VariableManaCost.class).forEach(cost -> cost.setMinX(1));
+        ability.setVariableCostsMinMax(1, Integer.MAX_VALUE);
         this.addAbility(ability.withCanBeCopied(false));
     }
 

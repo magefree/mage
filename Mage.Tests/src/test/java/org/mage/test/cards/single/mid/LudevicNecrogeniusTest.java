@@ -51,4 +51,78 @@ public class LudevicNecrogeniusTest extends CardTestPlayerBase {
         assertSubtype("Olag, Ludevic's Hubris", SubType.ZOMBIE);
         assertNotSubtype("Olag, Ludevic's Hubris", SubType.ELF);
     }
+
+    @Test
+    public void test_NotPlayableWithoutEnoughManaForMinX() {
+        // {X}{U}{U}{B}{B}, Exile X creature cards from your graveyard: Transform Ludevic. X can't be 0.
+        // Activate only as a sorcery.
+        addCard(Zone.BATTLEFIELD, playerA, "Ludevic, Necrogenius");
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 4); // only {U}{U}{B}{B}, missing {1} for X=1
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears"); // bear 2/2
+
+        checkPlayableAbility("not enough mana for X=1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{U}{U}{B}{B}", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Ludevic, Necrogenius", 1);
+    }
+
+    @Test
+    public void test_PlayableWithEnoughManaForMinX() {
+        // {X}{U}{U}{B}{B}, Exile X creature cards from your graveyard: Transform Ludevic. X can't be 0.
+        // Activate only as a sorcery.
+        addCard(Zone.BATTLEFIELD, playerA, "Ludevic, Necrogenius");
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 1 + 4); // {1}{U}{U}{B}{B} for X=1
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears"); // bear 2/2
+
+        checkPlayableAbility("enough mana for X=1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{U}{U}{B}{B}", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{U}{U}{B}{B}");
+        setChoice(playerA, "X=1"); // mana
+        setChoice(playerA, "X=1"); // creature cards to exile
+        setChoice(playerA, "Grizzly Bears"); // exile for the cost
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, "Olag, Ludevic's Hubris", 4 + 1, 4 + 1);
+        assertCounterCount(playerA, "Olag, Ludevic's Hubris", CounterType.P1P1, 1);
+        assertSubtype("Olag, Ludevic's Hubris", SubType.BEAR);
+        assertSubtype("Olag, Ludevic's Hubris", SubType.ZOMBIE);
+        assertTappedCount("Underground Sea", true, 5);
+    }
+
+    @Test
+    public void test_PlayableWithCostReductionForMinX() {
+        // {X}{U}{U}{B}{B}, Exile X creature cards from your graveyard: Transform Ludevic. X can't be 0.
+        // Activate only as a sorcery.
+        addCard(Zone.BATTLEFIELD, playerA, "Ludevic, Necrogenius");
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 4); // {1}{U}{U}{B}{B} - {2} = {U}{U}{B}{B}
+        //
+        // Nonland permanents you control are artifacts in addition to their other types.
+        addCard(Zone.BATTLEFIELD, playerA, "Encroaching Mycosynth");
+        // The first activated ability of an artifact you activate each turn costs {2} less to activate.
+        addCard(Zone.BATTLEFIELD, playerA, "Tezzeret, Betrayer of Flesh");
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears"); // bear 2/2
+
+        checkPlayableAbility("reduced X=1 is playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{U}{U}{B}{B}", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{U}{U}{B}{B}");
+        setChoice(playerA, "X=1"); // mana ({1}{U}{U}{B}{B} - {2} = {U}{U}{B}{B})
+        setChoice(playerA, "X=1"); // creature cards to exile
+        setChoice(playerA, "Grizzly Bears"); // exile for the cost
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, "Olag, Ludevic's Hubris", 4 + 1, 4 + 1);
+        assertCounterCount(playerA, "Olag, Ludevic's Hubris", CounterType.P1P1, 1);
+        assertSubtype("Olag, Ludevic's Hubris", SubType.BEAR);
+        assertSubtype("Olag, Ludevic's Hubris", SubType.ZOMBIE);
+        assertTappedCount("Underground Sea", true, 4);
+    }
 }

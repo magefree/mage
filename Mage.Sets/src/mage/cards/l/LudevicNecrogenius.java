@@ -7,7 +7,6 @@ import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
@@ -54,7 +53,7 @@ public final class LudevicNecrogenius extends TransformingDoubleFacedCard {
         );
         ability.addEffect(new InfoEffect("X can't be 0"));
         ability.addCost(new ExileXFromYourGraveCost(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
-        CardUtil.castStream(ability.getCosts().stream(), VariableManaCost.class).forEach(cost -> cost.setMinX(1));
+        ability.setVariableCostsMinMax(1, Integer.MAX_VALUE);
         this.getLeftHalfCard().addAbility(ability);
 
         // Olag, Ludevic's Hubris
