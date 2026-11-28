@@ -317,6 +317,7 @@ public class TheZetaSet extends ExpansionSet {
         cards.add(new SetCardInfo("Serra Angel", 10, Rarity.COMMON, mage.cards.s.SerraAngel.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Serra Angel", 131, Rarity.COMMON, mage.cards.s.SerraAngel.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Serra Angel", 252, Rarity.COMMON, mage.cards.s.SerraAngel.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shivan Dragon", 380, Rarity.RARE, mage.cards.s.ShivanDragon.class, FULL_ART));
         cards.add(new SetCardInfo("Simian Spirit Guide", 189, Rarity.COMMON, mage.cards.s.SimianSpiritGuide.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Simian Spirit Guide", 310, Rarity.COMMON, mage.cards.s.SimianSpiritGuide.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Simian Spirit Guide", 68, Rarity.COMMON, mage.cards.s.SimianSpiritGuide.class, FULL_ART_USE_VARIOUS));

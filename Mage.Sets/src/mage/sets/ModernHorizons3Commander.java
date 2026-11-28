@@ -54,6 +54,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Azlask, the Swelling Scourge", 9, Rarity.MYTHIC, mage.cards.a.AzlaskTheSwellingScourge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azlask, the Swelling Scourge", 17, Rarity.MYTHIC, mage.cards.a.AzlaskTheSwellingScourge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azlask, the Swelling Scourge", 25, Rarity.MYTHIC, mage.cards.a.AzlaskTheSwellingScourge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Azlask, the Swelling Scourge", 136, Rarity.MYTHIC, mage.cards.a.AzlaskTheSwellingScourge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azorius Chancery", 319, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Barrowgoyf", 50, Rarity.RARE, mage.cards.b.Barrowgoyf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barrowgoyf", 102, Rarity.RARE, mage.cards.b.Barrowgoyf.class, NON_FULL_USE_VARIOUS));
@@ -85,6 +86,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Cayth, Famed Mechanist", 10, Rarity.MYTHIC, mage.cards.c.CaythFamedMechanist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cayth, Famed Mechanist", 18, Rarity.MYTHIC, mage.cards.c.CaythFamedMechanist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cayth, Famed Mechanist", 26, Rarity.MYTHIC, mage.cards.c.CaythFamedMechanist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cayth, Famed Mechanist", 137, Rarity.MYTHIC, mage.cards.c.CaythFamedMechanist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra's Ignition", 209, Rarity.RARE, mage.cards.c.ChandrasIgnition.class));
         cards.add(new SetCardInfo("Chittering Dispatcher", 63, Rarity.RARE, mage.cards.c.ChitteringDispatcher.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 285, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
@@ -102,6 +104,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Coram, the Undertaker", 11, Rarity.MYTHIC, mage.cards.c.CoramTheUndertaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coram, the Undertaker", 19, Rarity.MYTHIC, mage.cards.c.CoramTheUndertaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coram, the Undertaker", 27, Rarity.MYTHIC, mage.cards.c.CoramTheUndertaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coram, the Undertaker", 138, Rarity.MYTHIC, mage.cards.c.CoramTheUndertaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Corrupted Crossroads", 332, Rarity.RARE, mage.cards.c.CorruptedCrossroads.class));
         cards.add(new SetCardInfo("Coveted Jewel", 287, Rarity.RARE, mage.cards.c.CovetedJewel.class));
         cards.add(new SetCardInfo("Crib Swap", 168, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
@@ -119,6 +122,9 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Disa the Restless", 12, Rarity.MYTHIC, mage.cards.d.DisaTheRestless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disa the Restless", 20, Rarity.MYTHIC, mage.cards.d.DisaTheRestless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Disa the Restless", 28, Rarity.MYTHIC, mage.cards.d.DisaTheRestless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Disa the Restless", 139, Rarity.MYTHIC, mage.cards.d.DisaTheRestless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Disa the Restless", 144, Rarity.MYTHIC, mage.cards.d.DisaTheRestless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Disa the Restless", 148, Rarity.MYTHIC, mage.cards.d.DisaTheRestless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dreamroot Cascade", 338, Rarity.RARE, mage.cards.d.DreamrootCascade.class));
         cards.add(new SetCardInfo("Dreamstone Hedron", 289, Rarity.UNCOMMON, mage.cards.d.DreamstoneHedron.class));
         cards.add(new SetCardInfo("Drown in Dreams", 181, Rarity.RARE, mage.cards.d.DrownInDreams.class));
@@ -199,6 +205,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Jyoti, Moag Ancient", 13, Rarity.MYTHIC, mage.cards.j.JyotiMoagAncient.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jyoti, Moag Ancient", 21, Rarity.MYTHIC, mage.cards.j.JyotiMoagAncient.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jyoti, Moag Ancient", 29, Rarity.MYTHIC, mage.cards.j.JyotiMoagAncient.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jyoti, Moag Ancient", 140, Rarity.MYTHIC, mage.cards.j.JyotiMoagAncient.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Karplusan Forest", 351, Rarity.RARE, mage.cards.k.KarplusanForest.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 352, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Kolaghan's Command", 268, Rarity.RARE, mage.cards.k.KolaghansCommand.class));
@@ -241,6 +248,9 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Omo, Queen of Vesuva", 14, Rarity.MYTHIC, mage.cards.o.OmoQueenOfVesuva.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Omo, Queen of Vesuva", 22, Rarity.MYTHIC, mage.cards.o.OmoQueenOfVesuva.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Omo, Queen of Vesuva", 30, Rarity.MYTHIC, mage.cards.o.OmoQueenOfVesuva.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Omo, Queen of Vesuva", 141, Rarity.MYTHIC, mage.cards.o.OmoQueenOfVesuva.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Omo, Queen of Vesuva", 145, Rarity.MYTHIC, mage.cards.o.OmoQueenOfVesuva.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Omo, Queen of Vesuva", 149, Rarity.MYTHIC, mage.cards.o.OmoQueenOfVesuva.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Opal Palace", 361, Rarity.COMMON, mage.cards.o.OpalPalace.class));
         cards.add(new SetCardInfo("Overclocked Electromancer", 58, Rarity.RARE, mage.cards.o.OverclockedElectromancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overclocked Electromancer", 110, Rarity.RARE, mage.cards.o.OverclockedElectromancer.class, NON_FULL_USE_VARIOUS));
@@ -283,6 +293,9 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Satya, Aetherflux Genius", 15, Rarity.MYTHIC, mage.cards.s.SatyaAetherfluxGenius.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Satya, Aetherflux Genius", 23, Rarity.MYTHIC, mage.cards.s.SatyaAetherfluxGenius.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Satya, Aetherflux Genius", 31, Rarity.MYTHIC, mage.cards.s.SatyaAetherfluxGenius.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Satya, Aetherflux Genius", 142, Rarity.MYTHIC, mage.cards.s.SatyaAetherfluxGenius.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Satya, Aetherflux Genius", 146, Rarity.MYTHIC, mage.cards.s.SatyaAetherfluxGenius.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Satya, Aetherflux Genius", 150, Rarity.MYTHIC, mage.cards.s.SatyaAetherfluxGenius.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Satyr Wayfinder", 244, Rarity.COMMON, mage.cards.s.SatyrWayfinder.class));
         cards.add(new SetCardInfo("Savage Lands", 371, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Sawhorn Nemesis", 60, Rarity.RARE, mage.cards.s.SawhornNemesis.class, NON_FULL_USE_VARIOUS));
@@ -371,6 +384,9 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 4, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 16, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 24, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 143, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 147, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 151, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ulamog's Crusher", 161, Rarity.COMMON, mage.cards.u.UlamogsCrusher.class));
         cards.add(new SetCardInfo("Ulamog's Dreadsire", 38, Rarity.RARE, mage.cards.u.UlamogsDreadsire.class));
         cards.add(new SetCardInfo("Ulamog's Nullifier", 275, Rarity.UNCOMMON, mage.cards.u.UlamogsNullifier.class));

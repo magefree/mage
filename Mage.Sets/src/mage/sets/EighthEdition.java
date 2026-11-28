@@ -56,7 +56,8 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Call of the Wild", 235, Rarity.RARE, mage.cards.c.CallOfTheWild.class));
         cards.add(new SetCardInfo("Canopy Spider", 236, Rarity.COMMON, mage.cards.c.CanopySpider.class));
         cards.add(new SetCardInfo("Canyon Wildcat", 181, Rarity.COMMON, mage.cards.c.CanyonWildcat.class));
-        cards.add(new SetCardInfo("Carrion Wall", 121, Rarity.UNCOMMON, mage.cards.c.CarrionWall.class));
+        cards.add(new SetCardInfo("Carrion Wall", 121, Rarity.UNCOMMON, mage.cards.c.CarrionWall.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carrion Wall", "121s", Rarity.UNCOMMON, mage.cards.c.CarrionWall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Catalog", 65, Rarity.COMMON, mage.cards.c.Catalog.class));
         cards.add(new SetCardInfo("Chastise", 9, Rarity.UNCOMMON, mage.cards.c.Chastise.class));
         cards.add(new SetCardInfo("Choke", 237, Rarity.UNCOMMON, mage.cards.c.Choke.class));
@@ -86,7 +87,8 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Banishing", 123, Rarity.COMMON, mage.cards.d.DarkBanishing.class));
         cards.add(new SetCardInfo("Deathgazer", 126, Rarity.UNCOMMON, mage.cards.d.Deathgazer.class));
         cards.add(new SetCardInfo("Death Pit Offering", 124, Rarity.RARE, mage.cards.d.DeathPitOffering.class));
-        cards.add(new SetCardInfo("Death Pits of Rath", 125, Rarity.RARE, mage.cards.d.DeathPitsOfRath.class));
+        cards.add(new SetCardInfo("Death Pits of Rath", 125, Rarity.RARE, mage.cards.d.DeathPitsOfRath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Death Pits of Rath", "125s", Rarity.RARE, mage.cards.d.DeathPitsOfRath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deepwood Ghoul", 127, Rarity.COMMON, mage.cards.d.DeepwoodGhoul.class));
         cards.add(new SetCardInfo("Defense Grid", 296, Rarity.RARE, mage.cards.d.DefenseGrid.class));
         cards.add(new SetCardInfo("Deflection", 74, Rarity.RARE, mage.cards.d.Deflection.class));
@@ -98,7 +100,8 @@ public final class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Disrupting Scepter", 298, Rarity.RARE, mage.cards.d.DisruptingScepter.class));
         cards.add(new SetCardInfo("Distorting Lens", 299, Rarity.RARE, mage.cards.d.DistortingLens.class));
         cards.add(new SetCardInfo("Diving Griffin", 17, Rarity.COMMON, mage.cards.d.DivingGriffin.class));
-        cards.add(new SetCardInfo("Drudge Skeletons", 129, Rarity.COMMON, mage.cards.d.DrudgeSkeletons.class));
+        cards.add(new SetCardInfo("Drudge Skeletons", 129, Rarity.COMMON, mage.cards.d.DrudgeSkeletons.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Drudge Skeletons", "129s", Rarity.COMMON, mage.cards.d.DrudgeSkeletons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dusk Imp", 130, Rarity.COMMON, mage.cards.d.DuskImp.class));
         cards.add(new SetCardInfo("Dwarven Demolition Team", 184, Rarity.UNCOMMON, mage.cards.d.DwarvenDemolitionTeam.class));
         cards.add(new SetCardInfo("Eager Cadet", "S1", Rarity.COMMON, mage.cards.e.EagerCadet.class));

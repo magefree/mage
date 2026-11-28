@@ -624,6 +624,11 @@ public class ScryfallImageSupportCards {
             add("PZA"); // Teenage Mutant Ninja Turtles Source Material
             add("SOS"); // Secrets of Strixhaven
             add("SOC"); // Secrets of Strixhaven Commander
+            add("PWCS"); // Planeswalker Championship Promos
+            add("PJSC"); // Japan Standard Cup
+            add("PR23"); // Regional Championship Qualifiers 2023
+            add("P30T"); // 30th Anniversary Celebration Tokyo
+            add("RFIN"); // Final Fantasy Regional Promos
             add("SOA"); // Secrets of Strixhaven Mystical Archive
             add("YSOS"); // Alchemy: Secrets of Strixhaven
             add("MSH"); // Marvel Super Heroes

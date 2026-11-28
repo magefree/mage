@@ -136,6 +136,7 @@ public final class TenthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dross Crocodile", 138, Rarity.COMMON, mage.cards.d.DrossCrocodile.class));
         cards.add(new SetCardInfo("Drudge Skeletons", "139*", Rarity.UNCOMMON, mage.cards.d.DrudgeSkeletons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drudge Skeletons", 139, Rarity.UNCOMMON, mage.cards.d.DrudgeSkeletons.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Drudge Skeletons", "139s", Rarity.UNCOMMON, mage.cards.d.DrudgeSkeletons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Duct Crawler", 198, Rarity.COMMON, mage.cards.d.DuctCrawler.class));
         cards.add(new SetCardInfo("Dusk Imp", "140*", Rarity.COMMON, mage.cards.d.DuskImp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dusk Imp", 140, Rarity.COMMON, mage.cards.d.DuskImp.class, NON_FULL_USE_VARIOUS));

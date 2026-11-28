@@ -25,7 +25,8 @@ public final class Unfinity extends ExpansionSet {
         // The set is the first Un-set to include a mix of eternal-legal cards and acorn cards.
 
         cards.add(new SetCardInfo("\"Name Sticker\" Goblin", "107m", Rarity.COMMON, mage.cards.n.NameStickerGoblin.class));
-        cards.add(new SetCardInfo("Atomwheel Acrobats", 130, Rarity.COMMON, mage.cards.a.AtomwheelAcrobats.class));
+        cards.add(new SetCardInfo("Atomwheel Acrobats", 130, Rarity.COMMON, mage.cards.a.AtomwheelAcrobats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Atomwheel Acrobats", 416, Rarity.COMMON, mage.cards.a.AtomwheelAcrobats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Attempted Murder", 352, Rarity.UNCOMMON, mage.cards.a.AttemptedMurder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Attempted Murder", 66, Rarity.UNCOMMON, mage.cards.a.AttemptedMurder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Crypt", 279, Rarity.RARE, mage.cards.b.BloodCrypt.class, NON_FULL_USE_VARIOUS));

@@ -20,6 +20,9 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
+        cards.add(new SetCardInfo("Dismember", 40, Rarity.UNCOMMON, mage.cards.d.Dismember.class));
+        cards.add(new SetCardInfo("Echo of Eons", 39, Rarity.RARE, mage.cards.e.EchoOfEons.class));
+        cards.add(new SetCardInfo("Encroaching Wastes", "6b", Rarity.UNCOMMON, mage.cards.e.EncroachingWastes.class));
         cards.add(new SetCardInfo("Forest", "9a", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", "10a", Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 18, Rarity.LAND, mage.cards.basiclands.Forest.class, RETRO_ART_USE_VARIOUS));
@@ -36,6 +39,7 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 24, Rarity.LAND, mage.cards.basiclands.Island.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 25, Rarity.LAND, mage.cards.basiclands.Island.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 26, Rarity.LAND, mage.cards.basiclands.Island.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mind Twist", 41, Rarity.RARE, mage.cards.m.MindTwist.class));
         cards.add(new SetCardInfo("Mountain", "7a", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", "8a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 15, Rarity.LAND, mage.cards.basiclands.Mountain.class, RETRO_ART_USE_VARIOUS));
@@ -68,5 +72,6 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 28, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 29, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Bauble", 36, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
+        cards.add(new SetCardInfo("Winds of Abandon", 42, Rarity.RARE, mage.cards.w.WindsOfAbandon.class, RETRO_ART));
     }
 }

@@ -190,7 +190,9 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flooded Grove", 309, Rarity.RARE, mage.cards.f.FloodedGrove.class));
         cards.add(new SetCardInfo("Forbidden Alchemy", 191, Rarity.COMMON, mage.cards.f.ForbiddenAlchemy.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 310, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
-        cards.add(new SetCardInfo("Forth Eorlingas!", 56, Rarity.RARE, mage.cards.f.ForthEorlingas.class));
+        cards.add(new SetCardInfo("Forth Eorlingas!", 56, Rarity.RARE, mage.cards.f.ForthEorlingas.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forth Eorlingas!", 139, Rarity.RARE, mage.cards.f.ForthEorlingas.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forth Eorlingas!", 460, Rarity.RARE, mage.cards.f.ForthEorlingas.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortified Village", 311, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
         cards.add(new SetCardInfo("Frodo, Adventurous Hobbit", 2, Rarity.MYTHIC, mage.cards.f.FrodoAdventurousHobbit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frodo, Adventurous Hobbit", 461, Rarity.MYTHIC, mage.cards.f.FrodoAdventurousHobbit.class, NON_FULL_USE_VARIOUS));
