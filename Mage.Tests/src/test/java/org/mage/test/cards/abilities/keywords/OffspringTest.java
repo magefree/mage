@@ -80,4 +80,46 @@ public class OffspringTest extends CardTestPlayerBase {
 
         checkOffspring(vinelasher, 1, 2, true);
     }
+
+    @Test
+    public void testPrintedOffspringCopiedByDoubleMajor() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, vinelasher);
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        setChoice(playerA, true); // Pay printed offspring {2}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vinelasher);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", vinelasher);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // 1 original card + 1 token from Double Major spell copy + 2 offspring tokens (one from each)
+        assertPermanentCount(playerA, vinelasher, 4);
+        assertTokenCount(playerA, vinelasher, 3);
+    }
+
+    @Test
+    public void testCopiedOffspringTriggerStrionicResonator() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Strionic Resonator");
+        addCard(Zone.HAND, playerA, vinelasher);
+
+        setChoice(playerA, true); // Pay printed offspring {2}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, vinelasher);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
+        // Vinelasher resolves, its offspring trigger goes on the stack.
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
+                "{2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy.");
+
+        setStrictChooseMode(false);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        // 1 original card + 2 offspring tokens (one from original trigger, one from copied trigger)
+        assertPermanentCount(playerA, vinelasher, 3);
+        assertTokenCount(playerA, vinelasher, 2);
+    }
 }
