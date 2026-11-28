@@ -4911,7 +4911,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void initStartingDeckSize() {
-        this.startingDeckSize = getLibrary().size();
+        this.startingDeckSize = getLibrary().size() + getCommandersIds().size();
     }
 
     @Override
