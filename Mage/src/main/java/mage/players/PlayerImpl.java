@@ -16,10 +16,12 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
 import mage.abilities.costs.*;
+import mage.abilities.costs.common.WaterbendXCost;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.AuraReplacementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
@@ -3924,12 +3926,28 @@ public abstract class PlayerImpl implements Player, Serializable {
             // Get the ability, if any, which allows for spending many as if it were another color.
             Set<ApprovingObject> approvingObjects = game.getContinuousEffects().asThough(ability.getSourceId(),
                     AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
+            // CR 701.67a: for each generic mana in a waterbend cost, the player may tap an untapped
+            // artifact or creature they control rather than pay that mana. handleWaterbendingCosts
+            // applies those taps at payment time, so the playable check must credit them here too.
+            int waterbendHelpers = getWaterbendHelpers(ability, game);
+            // getManaAvailable drops its empty Mana option, so a player with no mana in pool and no
+            // mana source has an empty list. Waterbend helpers can still pay the whole cost then.
+            ManaOptions manaToCompare = availableMana;
+            if (waterbendHelpers > 0 && availableMana.isEmpty()) {
+                manaToCompare = new ManaOptions();
+                manaToCompare.add(new Mana());
+            }
             for (Mana mana : abilityOptions) {
                 if (mana.count() == 0) {
                     return true;
                 }
                 // Iterate through combinations of available mana
-                for (Mana avail : availableMana) {
+                for (Mana avail : manaToCompare) {
+                    Mana payableMana = avail;
+                    if (waterbendHelpers > 0) {
+                        payableMana = avail.copy();
+                        payableMana.add(Mana.GenericMana(waterbendHelpers));
+                    }
                     // TODO: SPEND_OTHER_MANA effects with getAsThoughManaType can change mana type to pay,
                     //  but that code processing it as any color, need to test and fix another use cases
                     //  (example: Sunglasses of Urza - may spend white mana as though it were red mana)
@@ -3946,13 +3964,36 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (avail instanceof ConditionalMana && !((ConditionalMana) avail).apply(ability, game, getId(), ability.getManaCosts())) {
                         continue;
                     }
-                    if (mana.enough(avail)) { // here we need to check if spend mana as though allow to pay the mana cost
+                    if (mana.enough(payableMana)) { // here we need to check if spend mana as though allow to pay the mana cost
                         return true;
                     }
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * How many generic mana of this ability's Waterbend {X} cost the player can cover by tapping
+     * untapped artifacts and creatures they control (CR 701.67a). Capped at the minimum X part
+     * so the helpers never pay a non-waterbend mana symbol (CR 701.67b). A fixed WaterbendCost
+     * needs no credit: it already offers a {0} option for its own waterbend part.
+     */
+    private int getWaterbendHelpers(ActivatedAbility ability, Game game) {
+        int waterbendGeneric = 0;
+        for (ManaCost cost : ability.getManaCostsToPay()) {
+            if (cost instanceof WaterbendXCost) {
+                VariableManaCost variableCost = (VariableManaCost) cost;
+                waterbendGeneric = CardUtil.overflowInc(waterbendGeneric,
+                        CardUtil.overflowMultiply(variableCost.getMinX(), variableCost.getXInstancesCount()));
+            }
+        }
+        if (waterbendGeneric < 1) {
+            return 0;
+        }
+        return Math.min(waterbendGeneric, game.getBattlefield().count(
+                StaticFilters.FILTER_CONTROLLED_UNTAPPED_ARTIFACT_OR_CREATURE,
+                playerId, ability, game));
     }
 
     private void addPhyrexianLikePayOptions(ManaOptions abilityOptions) {
