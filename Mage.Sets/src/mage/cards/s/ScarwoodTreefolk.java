@@ -3,8 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +22,7 @@ public final class ScarwoodTreefolk extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Scarwood Treefolk enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), "tapped"));
+        this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
     private ScarwoodTreefolk(final ScarwoodTreefolk card) {

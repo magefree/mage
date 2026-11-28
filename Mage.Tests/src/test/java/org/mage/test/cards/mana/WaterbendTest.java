@@ -7,7 +7,7 @@ import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author TheElk801
+ * @author TheElk801, JayDi85
  */
 public class WaterbendTest extends CardTestPlayerBase {
 
@@ -132,5 +132,63 @@ public class WaterbendTest extends CardTestPlayerBase {
 
         // we drew 7 cards
         assertHandCount(playerA, 14);
+    }
+
+    @Test
+    public void test_WaterbendX_CastWithOmniscience_StillAnnouncesAndPaysWaterbendX() {
+        // You may cast spells from your hand without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
+        // As an additional cost to cast this spell, waterbend {X}.
+        // Exile X target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
+        addCard(Zone.HAND, playerA, "Waterbender's Restoration"); // {U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 2); // 2 creatures to exile & tap for waterbend {2}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Waterbender's Restoration");
+        setChoice(playerA, "Cast without paying its mana cost"); // Omniscience alternative cost
+        setChoice(playerA, "X=2"); // announce X for additional cost waterbend {X}
+        addTarget(playerA, "Grizzly Bears", 2); // exile 2 creatures
+        setChoice(playerA, "Grizzly Bears", 2); // tap 2 creatures to pay waterbend {2}
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Waterbender's Restoration", 1);
+        assertExileCount(playerA, "Grizzly Bears", 2);
+        assertPermanentCount(playerA, "Grizzly Bears", 0);
+    }
+
+    @Test
+    public void test_WaterbendX_CastWithMiracle_StillPaysWaterbendX() {
+        skipInitShuffling();
+
+        // Each instant and sorcery card in your hand has miracle {2}.
+        addCard(Zone.BATTLEFIELD, playerA, "Lorehold, the Historian");
+        // Draw a card.
+        addCard(Zone.HAND, playerA, "Think Twice"); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        // As an additional cost to cast this spell, waterbend {X}.
+        // Exile X target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
+        addCard(Zone.LIBRARY, playerA, "Waterbender's Restoration"); // {U}{U} -> miracle {2} + waterbend {X}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2); // pays miracle {2}
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 2); // tapped for waterbend {2}, then exiled
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Think Twice");
+        setChoice(playerA, true); // reveal Waterbender's Restoration for miracle
+        setChoice(playerA, true); // cast for miracle {2}
+        setChoice(playerA, "X=2"); // announce X for additional cost waterbend {X}
+        addTarget(playerA, "Grizzly Bears", 2); // exile 2 creatures
+        setChoice(playerA, "Grizzly Bears", 2); // tap 2 creatures to pay waterbend {2}
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Waterbender's Restoration", 1);
+        assertExileCount(playerA, "Grizzly Bears", 2);
+        assertPermanentCount(playerA, "Grizzly Bears", 0);
+        assertTappedCount("Plains", true, 2);
     }
 }

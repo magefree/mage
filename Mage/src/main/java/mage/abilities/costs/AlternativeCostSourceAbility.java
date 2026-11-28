@@ -167,7 +167,8 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
             alternativeCostsToCheck = this.alternateCosts;
         }
         if (ability instanceof SpellAbility) {
-            ability.getManaCostsToPay().removeIf(VariableCost.class::isInstance);
+            ability.getManaCostsToPay().removeIf(cost -> cost instanceof VariableCost
+                    && ((VariableCost) cost).getCostType() != VariableCostType.ADDITIONAL);
             CardUtil.reduceCost((SpellAbility) ability, ability.getManaCosts());
 
         } else {

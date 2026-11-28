@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.constants.Duration;
 import mage.constants.EnterEventType;
 import mage.constants.Zone;
@@ -15,7 +16,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
@@ -46,7 +47,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
     public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text, boolean selfScope, boolean optional, EnterEventType enterEventType) {
         super(Duration.WhileOnBattlefield, baseEffect.getOutcome(), selfScope);
         this.baseEffects = new Effects();
-        this.baseEffects.add(baseEffect);
+        addEffect(baseEffect);
         this.enterEventType = enterEventType;
         this.text = text;
         this.condition = condition;
@@ -62,7 +63,11 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
         this.enterEventType = effect.enterEventType;
     }
 
-    public void addEffect(Effect effect) {
+    public final void addEffect(Effect effect) {
+        // verify check to make sure tap effects used fine
+        if (effect instanceof TapSourceEffect && !((TapSourceEffect) effect).withoutTrigger()) {
+            throw new IllegalArgumentException("Wrong code usage: enters ability must use tap effect without triggers");
+        }
         baseEffects.add(effect);
     }
 

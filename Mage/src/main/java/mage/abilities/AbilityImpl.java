@@ -510,6 +510,7 @@ public abstract class AbilityImpl implements Ability {
                 case HARMONIZE:
                 case BEAM_ME_UP:
                 case MADNESS:
+                case MIRACLE:
                 case TRANSFORMED:
                 case DISTURB:
                 case MORE_THAN_MEETS_THE_EYE:
@@ -841,7 +842,7 @@ public abstract class AbilityImpl implements Ability {
                         "Announce the value for " + variableManaCost.getText(), game, this, true);
             }
 
-            int amountMana = xValue * variableManaCost.getXInstancesCount();
+            int amountMana = Math.max(0, xValue * variableManaCost.getXInstancesCount() - variableManaCost.getReducedBy());
             StringBuilder manaString = threadLocalBuilder.get();
             if (!(variableManaCost instanceof WaterbendXCost)) {
                 if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {

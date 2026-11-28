@@ -3,8 +3,6 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -12,14 +10,18 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author JayDi85
  */
-public class TapSourceUnlessPaysEffect extends OneShotEffect {
+public class TapSourceUnlessPaysEffect extends TapSourceEffect {
 
     protected Cost cost;
 
     public TapSourceUnlessPaysEffect(Cost cost) {
-        super(Outcome.Tap);
+        this(cost, true);
+    }
+
+    public TapSourceUnlessPaysEffect(Cost cost, boolean withoutTrigger) {
+        super(withoutTrigger);
         this.cost = cost;
         staticText = "tap {this} unless you " + CardUtil.addCostVerb(cost.getText());
     }
@@ -32,22 +34,21 @@ public class TapSourceUnlessPaysEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null && source.getAbilityType() == AbilityType.STATIC) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
             permanent = game.getPermanentEntering(source.getSourceId());
         }
-        if (player != null && permanent != null) {
-            if (cost.canPay(source, source, source.getControllerId(), game)
-                    && player.chooseUse(Outcome.Benefit, cost.getText() + "? (otherwise " + permanent.getName() + " becomes tapped)", source, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
-                    return true;
-                }
-            }
-            permanent.tap(source, game);
-            return true;
+        if (player == null || permanent == null) {
+            return false;
         }
-        return false;
+        if (cost.canPay(source, source, source.getControllerId(), game)
+                && player.chooseUse(Outcome.Benefit, cost.getText() + "? (otherwise " + permanent.getName() + " will be tapped)", source, game)) {
+            cost.clearPaid();
+            if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
+                return true;
+            }
+        }
+        return super.apply(game, source);
     }
 
     @Override

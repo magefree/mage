@@ -270,7 +270,7 @@ public class BotDeckBuildTest extends MageTestPlayerBase {
         // deck colors = colors pair with the max sum of cards scores, it's recalculated on each pick
         // all cards without ratings: common creatures with one colored mana symbol (same score)
         List<Card> picks = new ArrayList<>();
-        addCards(picks, "Raging Goblin", 3); // {R}
+        addCards(picks, "Goblin Piker", 3); // {1}{R}
         List<ColoredManaSymbol> colors = RateCard.chooseDeckColors(picks);
         Assert.assertEquals("first picks - red", 2, colors.size());
         Assert.assertTrue("first picks - red", colors.contains(ColoredManaSymbol.R));

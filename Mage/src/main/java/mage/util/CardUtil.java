@@ -7,6 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -251,6 +252,24 @@ public final class CardUtil {
 
                 // unsupported multi-option mana types for reduce (like HybridManaCost)
                 // nothing to do
+            }
+
+            // third run - carry remaining reduction into unpaid variable mana cost ({X})
+            // it's allow to reduce cost at announce time (CR 601.2b) and and during playable calculation;
+            // it's skip additional costs (VariableCostType.ADDITIONAL, e.g. "As an additional cost
+            // to cast this spell, waterbend {X}") because mana-cost reductions in an alternative cost only reduce the spell's mana cost
+            if (restToReduce > 0) {
+                for (ManaCost manaCost : manaCosts) {
+                    if (manaCost instanceof VariableManaCost
+                            && ((VariableManaCost) manaCost).getCostType() != VariableCostType.ADDITIONAL
+                            && !manaCost.isPaid()) {
+                        VariableManaCost reducedVar = ((VariableManaCost) manaCost).copy();
+                        reducedVar.addReducedBy(restToReduce);
+                        changedCost.put(manaCost, reducedVar);
+                        restToReduce = 0;
+                        break;
+                    }
+                }
             }
         }
 

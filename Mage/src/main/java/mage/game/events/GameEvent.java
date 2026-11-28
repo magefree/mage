@@ -79,7 +79,6 @@ public class GameEvent implements Serializable {
         EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
         CONNIVE, CONNIVED, // targetId is conniving permanent, playerId is its controller
         ECHO_PAID,
-        MIRACLE_CARD_REVEALED,
         /* MADNESS_CARD_EXILED,
          targetId    id of the card with madness
          sourceId    original id of the madness ability

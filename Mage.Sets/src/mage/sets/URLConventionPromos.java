@@ -22,6 +22,7 @@ public class URLConventionPromos extends ExpansionSet {
 
         cards.add(new SetCardInfo("Aeronaut Tinkerer", 8, Rarity.COMMON, mage.cards.a.AeronautTinkerer.class));
         cards.add(new SetCardInfo("Bloodthrone Vampire", 3, Rarity.RARE, mage.cards.b.BloodthroneVampire.class));
+        cards.add(new SetCardInfo("Borg Queen, Perfection Manifest", "2026-3", Rarity.MYTHIC, mage.cards.b.BorgQueenPerfectionManifest.class));
         cards.add(new SetCardInfo("Chandra's Fury", 5, Rarity.RARE, mage.cards.c.ChandrasFury.class));
         cards.add(new SetCardInfo("Counterspell", 2, Rarity.RARE, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Hylda of the Icy Crown", "2025-1", Rarity.MYTHIC, mage.cards.h.HyldaOfTheIcyCrown.class));

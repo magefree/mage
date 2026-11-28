@@ -1231,6 +1231,10 @@ public class VerifyCardDataTest {
                     // Skip for now, not a real draft set over Chronicles
                     return;
                 }
+                if (jsonSet.code.equals("FBB") || jsonSet.code.equals("4BB")) {
+                    // non-english sets
+                    return;
+                }
                 // how-to fix: it's miss promo sets with boosters, so just add/generate it in most use cases
                 errorsList.add(String.format("Error: missing set implementation (important for draft format) - %s - %s - boosters: %s",
                         jsonSet.code,

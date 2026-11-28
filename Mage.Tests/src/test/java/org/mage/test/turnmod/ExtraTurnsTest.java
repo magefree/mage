@@ -108,6 +108,9 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         setChoice(playerB, true); // Would you like to reveal first drawn card (Temporal Mastery, you can copy it and cast {2} less)?
+        // Miracle is implemented via a DRAW_CARD replacement effect, so XMage asks to order it with God-Eternal Kefnet;
+        // this extra choice can be removed if Miracle is rewritten to another mechanism.
+        setChoice(playerB, "God-Eternal Kefnet"); // choose replacement effect order
         setChoice(playerB, true); // Would you like to copy Temporal Mastery and cast it {2} less?
         setChoice(playerB, true); // Reveal Temporal Mastery to be able to use Miracle?
         setChoice(playerB, true); // Miracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

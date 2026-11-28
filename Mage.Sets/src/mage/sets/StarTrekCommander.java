@@ -34,6 +34,10 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Anguished Unmaking", 472, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Sanctum", 513, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
         cards.add(new SetCardInfo("Arcane Signet", 485, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Assimilate the Wounded", 269, Rarity.RARE, mage.cards.a.AssimilateTheWounded.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Assimilate the Wounded", 55, Rarity.RARE, mage.cards.a.AssimilateTheWounded.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Assimilation Assessor", 270, Rarity.RARE, mage.cards.a.AssimilationAssessor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Assimilation Assessor", 56, Rarity.RARE, mage.cards.a.AssimilationAssessor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astral Cornucopia", 338, Rarity.RARE, mage.cards.a.AstralCornucopia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astral Cornucopia", 486, Rarity.RARE, mage.cards.a.AstralCornucopia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Augur of Autumn", 299, Rarity.RARE, mage.cards.a.AugurOfAutumn.class, NON_FULL_USE_VARIOUS));
@@ -56,6 +60,7 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Blood-Sport Champion", 58, Rarity.RARE, mage.cards.b.BloodSportChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Borg Incursion", 12, Rarity.RARE, mage.cards.b.BorgIncursion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Borg Incursion", 215, Rarity.RARE, mage.cards.b.BorgIncursion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Borg Queen, Perfection Manifest", 197, Rarity.MYTHIC, mage.cards.b.BorgQueenPerfectionManifest.class));
         cards.add(new SetCardInfo("Borg Scout Sphere", 248, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Borg Scout Sphere", 36, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brainstorm", 434, Rarity.COMMON, mage.cards.b.Brainstorm.class));
@@ -186,6 +191,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Geordi La Forge, Innovator", 42, Rarity.RARE, mage.cards.g.GeordiLaForgeInnovator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Space Amoeba", 43, Rarity.RARE, mage.cards.g.GiantSpaceAmoeba.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Giant Space Amoeba", 257, Rarity.RARE, mage.cards.g.GiantSpaceAmoeba.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gift of Perfection", 258, Rarity.RARE, mage.cards.g.GiftOfPerfection.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gift of Perfection", 44, Rarity.RARE, mage.cards.g.GiftOfPerfection.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gin'tak Charge", 163, Rarity.COMMON, mage.cards.g.GintakCharge.class));
         cards.add(new SetCardInfo("Glacial Fortress", 385, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glacial Fortress", 535, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
@@ -424,6 +431,9 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 571, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Beacon of Kahless", 279, Rarity.RARE, mage.cards.t.TheBeaconOfKahless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Beacon of Kahless", 64, Rarity.RARE, mage.cards.t.TheBeaconOfKahless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Best of Both Worlds", 83, Rarity.RARE, mage.cards.t.TheBestOfBothWorlds.class));
+        cards.add(new SetCardInfo("The Borg Queen", 1, Rarity.MYTHIC, mage.cards.t.TheBorgQueen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Borg Queen", 5, Rarity.MYTHIC, mage.cards.t.TheBorgQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Immortal Sun", 347, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Immortal Sun", 495, Rarity.MYTHIC, mage.cards.t.TheImmortalSun.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Sword of Kahless", 123, Rarity.RARE, mage.cards.t.TheSwordOfKahless.class, NON_FULL_USE_VARIOUS));
