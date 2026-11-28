@@ -54,7 +54,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bitter Triumph", 445, Rarity.UNCOMMON, mage.cards.b.BitterTriumph.class));
         cards.add(new SetCardInfo("Blood-Sport Champion", 271, Rarity.RARE, mage.cards.b.BloodSportChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood-Sport Champion", 58, Rarity.RARE, mage.cards.b.BloodSportChampion.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Borg Incursion", 12, Rarity.RARE, mage.cards.b.BorgIncursion.class));
+        cards.add(new SetCardInfo("Borg Incursion", 12, Rarity.RARE, mage.cards.b.BorgIncursion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Borg Incursion", 215, Rarity.RARE, mage.cards.b.BorgIncursion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Borg Scout Sphere", 248, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Borg Scout Sphere", 36, Rarity.RARE, mage.cards.b.BorgScoutSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brainstorm", 434, Rarity.COMMON, mage.cards.b.Brainstorm.class));
@@ -183,7 +184,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Galvanizing Tenor", 67, Rarity.RARE, mage.cards.g.GalvanizingTenor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geordi La Forge, Innovator", 256, Rarity.RARE, mage.cards.g.GeordiLaForgeInnovator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Geordi La Forge, Innovator", 42, Rarity.RARE, mage.cards.g.GeordiLaForgeInnovator.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Giant Space Amoeba", 43, Rarity.RARE, mage.cards.g.GiantSpaceAmoeba.class));
+        cards.add(new SetCardInfo("Giant Space Amoeba", 43, Rarity.RARE, mage.cards.g.GiantSpaceAmoeba.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Giant Space Amoeba", 257, Rarity.RARE, mage.cards.g.GiantSpaceAmoeba.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gin'tak Charge", 163, Rarity.COMMON, mage.cards.g.GintakCharge.class));
         cards.add(new SetCardInfo("Glacial Fortress", 385, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glacial Fortress", 535, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
@@ -212,7 +214,8 @@ public final class StarTrekCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hinterland Harbor", 537, Rarity.RARE, mage.cards.h.HinterlandHarbor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Mine", 345, Rarity.RARE, mage.cards.h.HowlingMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Howling Mine", 494, Rarity.RARE, mage.cards.h.HowlingMine.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hugh, First of Many", 94, Rarity.RARE, mage.cards.h.HughFirstOfMany.class));
+        cards.add(new SetCardInfo("Hugh, First of Many", 94, Rarity.RARE, mage.cards.h.HughFirstOfMany.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hugh, First of Many", 321, Rarity.RARE, mage.cards.h.HughFirstOfMany.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("I.K.S. Negh'Var, Imperial Flagship", 113, Rarity.RARE, mage.cards.i.IKSNeghVarImperialFlagship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("I.K.S. Negh'Var, Imperial Flagship", 346, Rarity.RARE, mage.cards.i.IKSNeghVarImperialFlagship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Imperial Hullbreachers", 18, Rarity.RARE, mage.cards.i.ImperialHullbreachers.class, NON_FULL_USE_VARIOUS));

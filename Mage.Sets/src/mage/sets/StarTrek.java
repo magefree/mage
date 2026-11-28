@@ -224,6 +224,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Kira Nerys, Firebrand", 477, Rarity.RARE, mage.cards.k.KiraNerysFirebrand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kirk, Commanding Officer", 243, Rarity.UNCOMMON, mage.cards.k.KirkCommandingOfficer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kirk, Commanding Officer", 355, Rarity.UNCOMMON, mage.cards.k.KirkCommandingOfficer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kirk, Commanding Officer", 330, Rarity.UNCOMMON, mage.cards.k.KirkCommandingOfficer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 410, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 534, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kobayashi Maru Scenario", 68, Rarity.MYTHIC, mage.cards.k.KobayashiMaruScenario.class, NON_FULL_USE_VARIOUS));
@@ -338,6 +339,7 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Sarcophagus, Ship of the Dead", 170, Rarity.UNCOMMON, mage.cards.s.SarcophagusShipOfTheDead.class));
         cards.add(new SetCardInfo("Sarek, Federation Ambassador", 251, Rarity.RARE, mage.cards.s.SarekFederationAmbassador.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sarek, Federation Ambassador", 425, Rarity.RARE, mage.cards.s.SarekFederationAmbassador.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sarek, Federation Ambassador", 549, Rarity.RARE, mage.cards.s.SarekFederationAmbassador.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Saru, Unthreatened", 212, Rarity.UNCOMMON, mage.cards.s.SaruUnthreatened.class));
         cards.add(new SetCardInfo("Saurian Explorer", 213, Rarity.COMMON, mage.cards.s.SaurianExplorer.class));
         cards.add(new SetCardInfo("Savvy Profiteer", 171, Rarity.COMMON, mage.cards.s.SavvyProfiteer.class));
@@ -354,7 +356,8 @@ public final class StarTrek extends ExpansionSet {
         cards.add(new SetCardInfo("Sickbay", 268, Rarity.UNCOMMON, mage.cards.s.Sickbay.class));
         cards.add(new SetCardInfo("Silicate Surveyor", 172, Rarity.COMMON, mage.cards.s.SilicateSurveyor.class));
         cards.add(new SetCardInfo("Spatial Anomaly", 296, Rarity.UNCOMMON, mage.cards.s.SpatialAnomaly.class));
-        cards.add(new SetCardInfo("Spock, Always Your Friend", 253, Rarity.UNCOMMON, mage.cards.s.SpockAlwaysYourFriend.class));
+        cards.add(new SetCardInfo("Spock, Always Your Friend", 253, Rarity.UNCOMMON, mage.cards.s.SpockAlwaysYourFriend.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spock, Always Your Friend", 331, Rarity.UNCOMMON, mage.cards.s.SpockAlwaysYourFriend.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stable Wormhole", 215, Rarity.RARE, mage.cards.s.StableWormhole.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stable Wormhole", 473, Rarity.RARE, mage.cards.s.StableWormhole.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Starfleet Academy", 297, Rarity.MYTHIC, mage.cards.s.StarfleetAcademy.class, NON_FULL_USE_VARIOUS));
